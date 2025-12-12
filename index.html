@@ -3,579 +3,825 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interview Revision Tool (Dark Mode & Theme)</title>
-    
+    <title>Interview Revision Tool</title>
     <style>
-        /* -------------------------------------------------------------------------------------- */
-        /* --- 1. CSS VARIABLES (Theme Definitions) --- */
-        /* -------------------------------------------------------------------------------------- */
         :root {
-            /* Default Light Mode Variables */
-            --bg-color: #f4f7f9;
-            --main-bg: white;
+            --sidebar-width: 300px;
+            --header-height: 60px;
+            --accent-color: #007bff; /* Default accent color */
+            --background-color: #f4f7f6;
+            --card-background: #ffffff;
             --text-color: #333;
-            --header-bg: #2c3e50;
-            --header-text: white;
-            --sidebar-bg: #ecf0f1;
-            --card-border: #ddd;
-            --highlight-text: #e74c3c;
-            --code-bg: #2d2d2d;
-            --code-text: #f8f8f2;
-            
-            /* Default Accent Color (Blue) */
-            --accent-color: #3498db;
-            --link-hover-bg: #3498db;
+            --link-hover-color: #0056b3;
+            --border-color: #ddd;
         }
 
-        /* Dark Mode Overrides */
-        .dark-mode {
-            --bg-color: #121212;
-            --main-bg: #1e1e1e;
-            --text-color: #f0f0f0;
-            --header-bg: #000000;
-            --header-text: #f0f0f0;
-            --sidebar-bg: #252525;
-            --card-border: #333;
-            --highlight-text: #ff9800; /* Amber for highlights */
-            --link-hover-bg: var(--accent-color); /* Use accent color for hover */
+        body.dark-mode {
+            --background-color: #2c3e50;
+            --card-background: #34495e;
+            --text-color: #ecf0f1;
+            --link-hover-color: #5dade2;
+            --border-color: #4a637d;
         }
-        
-        /* -------------------------------------------------------------------------------------- */
-        /* --- 2. GLOBAL STYLES --- */
-        /* -------------------------------------------------------------------------------------- */
+
+        /* Basic Reset and Layout */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: var(--bg-color);
+            padding: 0;
+            background-color: var(--background-color);
             color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .app-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background-color: var(--main-bg);
-            min-height: 90vh;
-            transition: background-color 0.3s;
+        /* Header Styling */
+        .app-header {
+            height: var(--header-height);
+            background-color: var(--card-background);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* --- HEADER/MENU STYLES --- */
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: var(--header-bg);
-            color: var(--header-text);
+        .app-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--accent-color);
+            flex-shrink: 0;
         }
 
         .header-controls {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
         .header-controls button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
             background-color: var(--accent-color);
             color: white;
-            border: none;
-            padding: 8px 15px;
+            font-size: 0.9em;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background-color 0.2s;
         }
 
-        .menu-button-container {
+        .header-controls button:hover {
+            background-color: var(--link-hover-color);
+        }
+
+        /* Menu Dropdown Styling */
+        .domain-button-container, .category-button-container {
             position: relative;
         }
-
-        #main-menu {
+        
+        /* Shared Menu Styling */
+        .domain-menu, .category-menu {
             position: absolute;
-            top: 40px;
+            top: 100%; /* Position below the button */
             right: 0;
-            background-color: var(--main-bg);
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 10;
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             min-width: 150px;
-            display: none; /* Hide by default, JS toggles */
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            margin-top: 5px;
         }
 
-        #main-menu.visible {
-            display: block;
+        .domain-menu.visible, .category-menu.visible {
+            display: flex;
         }
 
-        #main-menu a {
-            display: block;
-            padding: 10px;
+        .domain-menu a, .category-menu a {
+            padding: 10px 15px;
             text-decoration: none;
             color: var(--text-color);
-            border-bottom: 1px solid var(--card-border);
+            font-size: 0.9em;
+            transition: background-color 0.1s, color 0.1s;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .domain-menu a:last-child, .category-menu a:last-child {
+            border-bottom: none;
         }
 
-        #main-menu a.active-category {
+        .domain-menu a:hover, .category-menu a:hover {
+            background-color: var(--background-color);
+        }
+        
+        .domain-menu a.active-category, .category-menu a.active-category {
             background-color: var(--accent-color);
             color: white;
             font-weight: bold;
         }
 
-        /* --- MAIN LAYOUT (SIDEBAR + CONTENT) --- */
-        .main-layout {
+
+        /* Main Content Area */
+        .main-container {
             display: flex;
-            min-height: calc(90vh - 65px);
+            flex-grow: 1;
+            overflow: hidden;
         }
 
-        .sidebar {
-            width: 250px;
-            background-color: var(--sidebar-bg);
-            padding: 20px;
-            border-right: 1px solid var(--card-border);
+        /* Sidebar Styling */
+        #topic-sidebar {
+            width: var(--sidebar-width);
             flex-shrink: 0;
+            background-color: var(--card-background);
+            border-right: 1px solid var(--border-color);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            overflow-y: auto;
+            transition: transform 0.3s ease-out;
         }
-        
-        .sidebar h2 {
-            margin-top: 0;
-            color: var(--header-bg);
-            border-bottom: 2px solid #bdc3c7;
-            padding-bottom: 10px;
+
+        #sidebar-header {
+            padding: 0 15px 15px 15px;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 15px;
         }
+
+        #sidebar-title {
+            font-size: 1.1em;
+            color: var(--accent-color);
+            margin: 0;
+            font-weight: 600;
+        }
         
-        .dark-mode .sidebar h2 {
-             color: var(--highlight-text);
+        #sidebar-controls {
+            display: none; /* Hidden by default, shown when topics are active */
+            margin-top: 10px;
+        }
+        
+        #sidebar-controls button {
+            width: 100%;
+            padding: 8px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        
+        #sidebar-controls button:hover {
+            background-color: var(--border-color);
+        }
+
+
+        #topic-list-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0 0px;
         }
 
         .topic-link {
-            display: block;
-            padding: 10px 5px;
-            margin-bottom: 5px;
-            background-color: var(--main-bg);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+            padding: 10px 15px;
             text-decoration: none;
             color: var(--text-color);
-            font-weight: bold;
-        }
-
-        .topic-link:hover, .topic-link.active {
-            background-color: var(--link-hover-bg);
-            color: white;
+            font-size: 0.95em;
+            transition: background-color 0.2s, color 0.2s;
+            border-bottom: 1px dashed var(--border-color);
         }
         
-        .topic-link.active {
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        .topic-link:last-child {
+            border-bottom: none;
         }
 
-        .content {
+        .topic-link:hover {
+            background-color: var(--background-color);
+        }
+
+        .topic-link.active {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .sub-category-link {
+            font-weight: 500;
+            padding-left: 10px;
+            background-color: var(--background-color);
+        }
+
+        /* Content Area */
+        #content-area {
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
         }
 
-        /* --- CONTENT DETAILS STYLES --- */
-        .card {
-            background-color: var(--main-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .card h3 {
-            color: var(--highlight-text);
-            margin-top: 0;
-            border-bottom: 1px dashed var(--highlight-text);
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        
-        .qa-list li {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
-            margin-bottom: 10px;
-        }
-        
-        pre {
-            background-color: var(--code-bg);
-            color: var(--code-text);
-            padding: 15px;
-            border-radius: 4px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-        
-        /* Settings specific styles */
-        #settings-page {
-            max-width: 500px;
-        }
-        .setting-control {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--card-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        /* Hide content initially */
+        /* Detail Cards */
         #topic-details, #settings-page {
-            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        #topic-details {
+            display: none; /* Hidden by default */
         }
 
-        /* Hide mobile-only button on large screens */
+        .detail-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .detail-card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            font-size: 1.4em;
+        }
+        
+        #detail-topic-name {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        /* Specific Content Styling */
+        #detail-key-points, #detail-qa {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #detail-key-points li {
+            padding: 8px 0;
+            border-bottom: 1px dotted var(--border-color);
+            line-height: 1.5;
+        }
+        
+        #detail-key-points li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        #detail-qa li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.6;
+        }
+        
+        #detail-qa li strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        #detail-code-example {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        /* Settings Page Styling */
+        #settings-page {
+            padding-top: 50px;
+            display: none; /* Hidden by default */
+        }
+        
+        #settings-page h1 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .setting-group {
+            background-color: var(--card-background);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .setting-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .setting-group input[type="color"],
+        .setting-group input[type="checkbox"] {
+            margin-top: 5px;
+        }
+
+        /* Initial Message Styling */
+        #initial-message {
+            text-align: center;
+            padding-top: 100px;
+            color: #888;
+        }
+
+        /* Mobile Adjustments */
         .topic-toggle-mobile {
             display: none;
         }
-
-
-        /* --- MOBILE LAYOUT (Media Query) --- */
+        
         @media (max-width: 768px) {
-            .app-container { margin: 0; box-shadow: none; }
-            .main-layout { flex-direction: column; }
-            .sidebar { 
-                width: 100%; 
-                border-right: none; 
-                border-bottom: 1px solid var(--card-border); 
+            :root {
+                --sidebar-width: 280px;
             }
             
-            /* Show mobile-only button on small screens */
-            .topic-toggle-mobile { 
-                display: block; 
+            .topic-toggle-mobile {
+                display: block;
             }
             
-            /* --- Mobile Sidebar Toggle Logic --- */
-            /* Collapse sidebar content initially on mobile */
-            .sidebar h2, #topic-list-container {
-                max-height: 0;
-                overflow: hidden;
-                padding-top: 0;
-                padding-bottom: 0;
-                transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            .app-header h2 {
+                font-size: 1.1em;
             }
 
-            /* Open state for sidebar content */
-            .sidebar.open h2, .sidebar.open #topic-list-container {
-                max-height: 500px; /* Needs to be large enough to contain content */
-                padding-top: 10px;
-                padding-bottom: 10px;
+            .main-container {
+                flex-direction: column;
+            }
+
+            #topic-sidebar {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                height: calc(100vh - var(--header-height));
+                transform: translateX(-100%);
+                z-index: 50;
+                width: var(--sidebar-width);
+            }
+
+            #topic-sidebar.open {
+                transform: translateX(0);
             }
             
-            /* The main sidebar title should be visible to click when closed */
-            .sidebar h2 {
-                max-height: none; 
-                padding-top: 0;
-                padding-bottom: 10px;
+            #content-area {
+                padding: 15px;
+            }
+            
+            .detail-card {
+                padding: 15px;
+            }
+            
+            .header-controls button {
+                 padding: 6px 10px;
+                 font-size: 0.85em;
+            }
+            
+            .domain-menu, .category-menu {
+                min-width: 120px;
+                right: -5px; /* Adjust dropdown position on small screens */
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <h1 id="current-category-title"></h1>
-            <div class="header-controls">
-                <div class="topic-toggle-mobile">
-                    <button id="topic-toggle-btn">Topics</button>
-                </div>
-                <button id="settings-btn">⚙️ Settings</button>
-                <div class="menu-button-container">
-                    <button id="menu-toggle-btn">Menu ☰</button>
-                    <nav id="main-menu">
-                        </nav>
+
+    <header class="app-header">
+        <h2 id="current-category-title">Interview Revision</h2>
+        <div class="header-controls">
+            
+            <div class="domain-button-container">
+                <button id="domain-toggle-btn">Domain</button>
+                <nav id="domain-menu" class="domain-menu">
+                    </nav>
+            </div>
+
+            <div class="topic-toggle-mobile">
+                <button id="topic-toggle-btn">Topics</button>
+            </div>
+            
+            <div class="category-button-container">
+                <button id="category-toggle-btn">Category</button>
+                <nav id="category-menu" class="category-menu">
+                    </nav>
+            </div>
+
+            <button id="settings-btn">Settings</button> 
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <aside id="topic-sidebar">
+            <div id="sidebar-header">
+                <h3 id="sidebar-title">Categories</h3>
+                <div id="sidebar-controls">
+                    <button id="back-to-categories-btn">← Back to Sub-Categories</button>
                 </div>
             </div>
-        </header>
+            <div id="topic-list-container">
+                </div>
+        </aside>
 
-        <div class="main-layout">
-            <aside id="topic-sidebar" class="sidebar">
-                <h2>Topics</h2>
-                <div id="topic-list-container">
-                    </div>
-            </aside>
-
-            <main id="content-display" class="content">
-                <div class="initial-message" id="initial-message">
-                    <h3>Welcome to Interview Revision!</h3>
-                    <p>Select a category from the top menu, then select a topic from the left sidebar to begin.</p>
+        <main id="content-area">
+            
+            <div id="topic-details">
+                <h1 id="detail-topic-name"></h1>
+                
+                <div id="definition-card" class="detail-card">
+                    <h3>Definition</h3>
+                    <p id="detail-definition"></p>
                 </div>
                 
-                <section id="settings-page">
-                    <h2>⚙️ Application Settings</h2>
-                    <div class="card" id="settings-card">
-                        <div class="setting-control">
-                            <label for="theme-toggle"><h3>Dark Mode</h3></label>
-                            <input type="checkbox" id="theme-toggle">
-                        </div>
-                        
-                        <div class="setting-control">
-                            <label for="accent-color"><h3>Accent Color</h3></label>
-                            <input type="color" id="accent-color" value="#3498db">
-                        </div>
-                        
-                        <p style="margin-top: 15px;">* Accent color controls the highlight color for buttons, active links, and Q&A borders.</p>
-                        <button onclick="saveSettings()">Save Settings</button>
-                    </div>
-                </section>
+                <div id="key-points-card" class="detail-card">
+                    <h3>Key Interview Points</h3>
+                    <ul id="detail-key-points"></ul>
+                </div>
 
-                <section id="topic-details">
-                    <h2 id="detail-topic-name"></h2>
-                    
-                    <div class="card">
-                        <h3>Definition</h3>
-                        <p id="detail-definition"></p>
-                    </div>
+                <div id="example-card" class="detail-card">
+                    <h3>General Example/Use Case</h3>
+                    <p id="detail-example"></p>
+                </div>
+                
+                <div id="qa-card" class="detail-card">
+                    <h3>Common Interview Q&A</h3>
+                    <ul id="detail-qa"></ul>
+                </div>
+                
+                <div id="code-example-card" class="detail-card">
+                    <h3>Code Example</h3>
+                    <pre id="detail-code-example"></pre>
+                </div>
+            </div>
 
-                    <div class="card" id="key-points-card">
-                        <h3>Interview Key Points</h3>
-                        <ul id="detail-key-points" class="key-points-list"></ul>
-                    </div>
-                    
-                    <div class="card" id="qa-card">
-                        <h3>Questions & Answers</h3>
-                        <ul id="detail-qa" class="qa-list"></ul>
-                    </div>
+            <div id="settings-page">
+                <h1>App Settings</h1>
+                
+                <div class="setting-group">
+                    <label for="theme-toggle">Theme Preference</label>
+                    <input type="checkbox" id="theme-toggle">
+                    <span id="theme-status">Light Mode</span>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Toggle between Light and Dark mode.</p>
+                </div>
 
-                    <div class="card" id="code-example-card">
-                        <h3>Code Example / Usage</h3>
-                        <pre><code id="detail-code-example"></code></pre>
-                    </div>
-                    
-                    <div class="card" id="example-card">
-                        <h3>General Example</h3>
-                        <p id="detail-example"></p>
-                    </div>
-                </section>
-            </main>
-        </div>
+                <div class="setting-group">
+                    <label for="accent-color">Accent Color</label>
+                    <input type="color" id="accent-color" value="#007bff">
+                    <p style="font-size: 0.9em; margin-top: 10px;">Select a custom color for highlights and buttons.</p>
+                </div>
+            </div>
+
+            <div id="initial-message">
+                <h2>Welcome to the Interview Revision Tool!</h2>
+                <p>Select a **Domain** from the menu above to start your revision.</p>
+                <p>Ensure your `data.json` file is present and correctly formatted.</p>
+            </div>
+
+        </main>
     </div>
 
     <script>
-
+        // --------------------------------------------------------------------------------------
+        // 1. GLOBAL DATA AND DOM REFERENCES
+        // --------------------------------------------------------------------------------------
         let interviewData = null; 
-
-        async function loadAndInitialize(url) {
-            try {
-                // 1. Fetch the data from the external file
-                const response = await fetch(url);
-                
-                // 2. Check if the fetch was successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                
-                // 3. Convert the response body to a JavaScript object
-                interviewData = await response.json();
-                
-                // 4. Initialize the rest of the application
-                loadSettings(); 
-                renderMainMenu();
-                
-                const firstCategoryKey = Object.keys(interviewData.menu)[0];
-                if (firstCategoryKey) {
-                    switchCategory(firstCategoryKey);
-                } else {
-                    document.getElementById('initial-message').style.display = 'block'; 
-                }
-
-            } catch (error) {
-                console.error("Error loading or parsing JSON data:", error);
-                // Display an error message to the user if the data load fails
-                document.getElementById('initial-message').innerHTML = `
-                    <h3>Data Loading Error!</h3>
-                    <p>Could not load interview data. Please ensure 'interviewData.json' is in the correct directory and is valid JSON format.</p>
-                    <p>Error details: ${error.message}</p>
-                `;
-                document.getElementById('initial-message').style.display = 'block'; 
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Start the application by loading the external file
-            loadAndInitialize('data.json'); 
-        });
-        // --------------------------------------------------------------------------------------
-        // 2. DOM ELEMENT REFERENCES
-        // --------------------------------------------------------------------------------------
+        let currentCategoryKey = null; // Tracks the Domain (e.g., 'java')
+        let currentSubCategoryKey = null; // Tracks the Sub-Category (e.g., 'core_concepts')
+        let sidebarState = 'categories'; // Tracks what the sidebar is currently showing ('categories' or 'topics')
+        
+        // --- DOM References ---
         const docBody = document.body;
         const sidebar = document.getElementById('topic-sidebar');
+        const sidebarTitle = document.getElementById('sidebar-title');
         const topicListContainer = document.getElementById('topic-list-container');
-        const menu = document.getElementById('main-menu');
+        const domainMenu = document.getElementById('domain-menu'); 
+        const categoryMenu = document.getElementById('category-menu'); 
         const contentDetails = document.getElementById('topic-details');
         const settingsPage = document.getElementById('settings-page');
         const initialMessage = document.getElementById('initial-message');
-        const menuToggleButton = document.getElementById('menu-toggle-btn');
-        const topicToggleButton = document.getElementById('topic-toggle-btn'); // 👈 Fixed button
+        
+        // --- Buttons ---
+        const domainToggleButton = document.getElementById('domain-toggle-btn');
+        const categoryToggleButton = document.getElementById('category-toggle-btn'); 
+        const topicToggleButton = document.getElementById('topic-toggle-btn');
         const settingsButton = document.getElementById('settings-btn');
         const themeToggle = document.getElementById('theme-toggle');
         const accentColorInput = document.getElementById('accent-color');
-        const currentCategoryTitle = document.getElementById('current-category-title');
         
-        let currentCategoryKey = null; 
+        // --- Dynamic Elements ---
+        const currentCategoryTitle = document.getElementById('current-category-title');
+        const sidebarControls = document.getElementById('sidebar-controls');
+        const backButton = document.getElementById('back-to-categories-btn');
+
 
         // --------------------------------------------------------------------------------------
-        // 3. THEME/SETTINGS FUNCTIONS
+        // 2. THEME/SETTINGS FUNCTIONS
         // --------------------------------------------------------------------------------------
 
         function applyTheme(isDark, accentColor) {
-            // Apply Dark Mode Class
-            if (isDark) {
-                docBody.classList.add('dark-mode');
-                themeToggle.checked = true;
-            } else {
-                docBody.classList.remove('dark-mode');
-                themeToggle.checked = false;
-            }
-            
-            // Apply Accent Color Variable
-            docBody.style.setProperty('--accent-color', accentColor);
-            accentColorInput.value = accentColor;
+            docBody.classList.toggle('dark-mode', isDark);
+            document.getElementById('theme-status').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+            document.documentElement.style.setProperty('--accent-color', accentColor);
         }
 
         function loadSettings() {
-            const savedTheme = localStorage.getItem('theme');
-            const savedColor = localStorage.getItem('accentColor') || '#3498db';
+            const isDark = localStorage.getItem('isDarkTheme') === 'true';
+            const accent = localStorage.getItem('accentColor') || '#007bff';
+
+            themeToggle.checked = isDark;
+            accentColorInput.value = accent;
             
-            applyTheme(savedTheme === 'dark', savedColor);
+            applyTheme(isDark, accent);
         }
 
-        window.saveSettings = function() {
+        function saveSettings() {
             const isDark = themeToggle.checked;
-            const accentColor = accentColorInput.value;
+            const accent = accentColorInput.value;
             
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            localStorage.setItem('accentColor', accentColor);
+            localStorage.setItem('isDarkTheme', isDark);
+            localStorage.setItem('accentColor', accent);
             
-            applyTheme(isDark, accentColor);
-            alert('Settings saved successfully!');
+            applyTheme(isDark, accent);
         }
-
-        themeToggle.addEventListener('change', () => {
-            // Live preview when toggling dark mode
-            const isDark = themeToggle.checked;
-            if (isDark) {
-                 docBody.classList.add('dark-mode');
-            } else {
-                 docBody.classList.remove('dark-mode');
-            }
-        });
-
-        accentColorInput.addEventListener('input', (e) => {
-            // Live preview when changing color
-            docBody.style.setProperty('--accent-color', e.target.value);
-        });
         
-        // --- Settings Page Display Logic ---
-        settingsButton.addEventListener('click', () => {
-            // Hide menu if open
-            menu.classList.remove('visible');
-            
-            // Hide everything else and show settings
-            initialMessage.style.display = 'none';
-            contentDetails.style.display = 'none';
-            settingsPage.style.display = 'block';
-            
-            // Ensure topic sidebar is closed on mobile
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
-            }
-        });
-
-        // --- Menu Toggle (Top Right) ---
-        menuToggleButton.addEventListener('click', () => {
-            menu.classList.toggle('visible');
-            // Hide settings page if it was open
-            if (settingsPage.style.display === 'block') {
-                settingsPage.style.display = 'none';
-                initialMessage.style.display = 'block';
-            }
-        });
-
-        // --- Topics Toggle (Mobile Only) ---
-        topicToggleButton.addEventListener('click', () => { // 👈 FIX: Added event listener
-            sidebar.classList.toggle('open');
-        });
-        
+        // --- UI State Management ---
         function showTopicContentArea() {
             settingsPage.style.display = 'none';
             initialMessage.style.display = 'none';
             contentDetails.style.display = 'block';
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+            }
+        }
+
+        function showSettingsPage() {
+            settingsPage.style.display = 'block';
+            initialMessage.style.display = 'none';
+            contentDetails.style.display = 'none';
+            
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+            }
         }
 
         // --------------------------------------------------------------------------------------
-        // 4. CORE RENDERING FUNCTIONS
+        // 3. EVENT LISTENERS
+        // --------------------------------------------------------------------------------------
+        
+        // Settings Listeners
+        settingsButton.addEventListener('click', () => {
+            domainMenu.classList.remove('visible');
+            categoryMenu.classList.remove('visible'); 
+            showSettingsPage();
+        });
+        themeToggle.addEventListener('change', saveSettings);
+        accentColorInput.addEventListener('input', saveSettings);
+
+        // Header Button Listeners
+        domainToggleButton.addEventListener('click', () => {
+            domainMenu.classList.toggle('visible');
+            categoryMenu.classList.remove('visible'); 
+            // Close settings if open
+            if (settingsPage.style.display === 'block') {
+                showTopicContentArea(); 
+            }
+        });
+        
+        categoryToggleButton.addEventListener('click', () => {
+            // Only toggle if a domain is actually selected and has sub-categories
+            if (currentCategoryKey && categoryMenu.children.length > 0) {
+                 categoryMenu.classList.toggle('visible');
+                 domainMenu.classList.remove('visible'); 
+            } else {
+                 alert("Please select a Domain first or the current domain has no categories.");
+            }
+            // Close settings if open
+            if (settingsPage.style.display === 'block') {
+                showTopicContentArea(); 
+            }
+        });
+
+        topicToggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Sidebar Back Button Listener
+        backButton.addEventListener('click', () => { 
+            if (currentCategoryKey && interviewData.menu[currentCategoryKey].categories) {
+                renderSubCategories(interviewData.menu[currentCategoryKey].categories);
+            }
+        });
+        
+        // Global click listener to close menus
+        document.addEventListener('click', (e) => {
+            // Check if click is outside both menus and buttons
+            const isDomainBtn = domainToggleButton.contains(e.target);
+            const isCategoryBtn = categoryToggleButton.contains(e.target);
+            const isDomainMenu = domainMenu.contains(e.target);
+            const isCategoryMenu = categoryMenu.contains(e.target);
+
+            if (!isDomainBtn && !isDomainMenu) {
+                domainMenu.classList.remove('visible');
+            }
+            if (!isCategoryBtn && !isCategoryMenu) {
+                categoryMenu.classList.remove('visible');
+            }
+        });
+
+
+        // --------------------------------------------------------------------------------------
+        // 4. CORE RENDERING FUNCTIONS (Updated for two menus)
         // --------------------------------------------------------------------------------------
 
+        /**
+         * Renders all top-level Domains into the #domain-menu.
+         */
         function renderMainMenu() {
-            menu.innerHTML = Object.keys(interviewData.menu).map(key => {
+            domainMenu.innerHTML = Object.keys(interviewData.menu).map(key => {
                 const category = interviewData.menu[key];
                 return `<a href="#" data-category-key="${key}">${category.title.toUpperCase()}</a>`;
             }).join('');
             
-            menu.querySelectorAll('a').forEach(link => {
+            domainMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const key = e.target.getAttribute('data-category-key');
                     switchCategory(key);
-                    menu.classList.remove('visible'); // Hide menu after selection
+                    domainMenu.classList.remove('visible'); 
                 });
             });
         }
         
+        /**
+         * Renders the Sub-Categories of the currently selected Domain into the #category-menu.
+         */
+        function renderCategoryMenu(subCategories) {
+            categoryMenu.innerHTML = Object.keys(subCategories).map(subKey => {
+                const subCategory = subCategories[subKey];
+                return `<a href="#" data-sub-key="${subKey}">${subCategory.title}</a>`;
+            }).join('');
+            
+            categoryMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const subKey = e.target.getAttribute('data-sub-key');
+                    // This switches the sidebar view to show topics for this sub-category
+                    switchSubCategory(subKey); 
+                    categoryMenu.classList.remove('visible'); 
+                });
+            });
+        }
+        
+        /**
+         * Switches the main Domain (Level 1).
+         * Renders Level 2 Sub-Categories into the sidebar AND the Category Menu.
+         */
         function switchCategory(key) {
+            if (!interviewData || !interviewData.menu[key]) return;
+
             currentCategoryKey = key;
+            currentSubCategoryKey = null; 
             const categoryData = interviewData.menu[key];
             
             currentCategoryTitle.textContent = categoryData.title + ' Revision';
             
-            // Set active style for menu category
-            document.querySelectorAll('#main-menu a').forEach(link => {
+            // Set active style for Domain menu link
+            document.querySelectorAll('#domain-menu a').forEach(link => {
                 link.classList.remove('active-category');
                 if (link.getAttribute('data-category-key') === key) {
                     link.classList.add('active-category');
                 }
             });
 
-            renderSidebar(categoryData.topics);
+            const subCategoryKeys = Object.keys(categoryData.categories || {});
             
-            const topicKeys = Object.keys(categoryData.topics);
-            const firstTopicKey = topicKeys[0];
-            
-            if (firstTopicKey) {
-                displayTopicContent(key, firstTopicKey);
-                // 👈 FIX: Explicitly set the active class on the first topic link after rendering
-                const firstTopicLink = document.querySelector(`#topic-list-container [data-topic-key="${firstTopicKey}"]`);
-                if (firstTopicLink) {
-                    firstTopicLink.classList.add('active');
-                }
+            // 1. Always clear and render the Category Menu first
+            renderCategoryMenu(categoryData.categories || {});
+
+            if (subCategoryKeys.length > 0) {
+                 // 2. RENDER Level 2 (Sub-Categories) in the sidebar
+                 renderSubCategories(categoryData.categories);
+                 
+                 // Set up the content area with the first available topic of the first sub-category
+                 const firstSubCategoryKey = subCategoryKeys[0];
+                 const firstSubCategoryData = categoryData.categories[firstSubCategoryKey];
+                 const topicKeys = Object.keys(firstSubCategoryData.topics || {});
+                 
+                 if (topicKeys.length > 0) {
+                    const firstTopicKey = topicKeys[0];
+                    currentSubCategoryKey = firstSubCategoryKey;
+                    
+                    // Display the content of the first topic
+                    displayTopicContent(currentCategoryKey, currentSubCategoryKey, firstTopicKey);
+                    
+                    // Highlight the first sub-category link in the sidebar and category menu
+                    const firstSubLinkMenu = document.querySelector(`#category-menu [data-sub-key="${firstSubCategoryKey}"]`);
+                    if (firstSubLinkMenu) firstSubLinkMenu.classList.add('active-category');
+                 }
+
             } else {
-                 initialMessage.style.display = 'block'; // Show welcome message if category is empty
+                 // No sub-categories: reset view
+                 initialMessage.style.display = 'block'; 
                  contentDetails.style.display = 'none';
+                 topicListContainer.innerHTML = 'No sub-categories found.'; 
+                 sidebarTitle.textContent = 'Categories';
+                 sidebarControls.style.display = 'none';
             }
 
-            showTopicContentArea(); // Show content area when category is switched
+            showTopicContentArea();
         }
 
-        function renderSidebar(topics) {
+        /**
+         * Renders the Sub-Categories (Level 2) into the sidebar.
+         */
+        function renderSubCategories(subCategories) {
+            sidebarState = 'categories'; 
             topicListContainer.innerHTML = ''; 
-            
-            Object.keys(topics).forEach(topicKey => {
-                const topic = topics[topicKey];
+            sidebarTitle.textContent = 'Sub-Categories'; 
+            sidebarControls.style.display = 'none'; 
+
+            Object.keys(subCategories).forEach(subKey => {
+                const subCategory = subCategories[subKey];
                 const link = document.createElement('a');
                 link.href = '#';
-                link.classList.add('topic-link');
-                link.setAttribute('data-topic-key', topicKey);
-                link.textContent = topic.title;
+                link.classList.add('topic-link', 'sub-category-link'); 
+                link.setAttribute('data-sub-key', subKey);
+                link.textContent = subCategory.title;
                 
+                // Add click listener to switch to topics view (Level 3)
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    displayTopicContent(currentCategoryKey, topicKey);
+                    switchSubCategory(subKey);
+                });
+
+                topicListContainer.appendChild(link);
+            });
+        }
+
+
+        /**
+         * Switches the Sub-Category (Level 2) and renders the Topics (Level 3).
+         */
+        function switchSubCategory(subKey) {
+            if (!currentCategoryKey) return;
+            
+            currentSubCategoryKey = subKey;
+            
+            const categoryData = interviewData.menu[currentCategoryKey];
+            const subCategoryData = categoryData.categories[subKey];
+            if (!subCategoryData) return;
+            
+            // --- Highlighting in Sidebar and Menu ---
+            // Highlight the active sub-category link in the CATEGORY menu
+            document.querySelectorAll('#category-menu a').forEach(l => l.classList.remove('active-category'));
+            const activeSubMenuLink = document.querySelector(`#category-menu [data-sub-key="${subKey}"]`);
+            if (activeSubMenuLink) activeSubMenuLink.classList.add('active-category');
+            
+            // If the sidebar is currently showing sub-category links, highlight the selected one
+            if (sidebarState === 'categories') {
+                document.querySelectorAll('.sub-category-link').forEach(l => l.classList.remove('active'));
+                const activeSubLink = document.querySelector(`#topic-list-container [data-sub-key="${subKey}"]`);
+                if (activeSubLink) activeSubLink.classList.add('active');
+            }
+
+
+            // 1. Render the actual TOPICS (Level 3)
+            sidebarState = 'topics'; 
+            topicListContainer.innerHTML = '';
+            sidebarTitle.textContent = subCategoryData.title + ' Topics';
+            sidebarControls.style.display = 'block'; 
+            
+            const topicKeys = Object.keys(subCategoryData.topics || {});
+
+            topicKeys.forEach(topicKey => {
+                const topic = subCategoryData.topics[topicKey];
+                const link = document.createElement('a');
+                link.href = '#';
+                link.classList.add('topic-link', 'topic-detail-link');
+                link.setAttribute('data-topic-key', topicKey);
+                link.textContent = topic.title;
+
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
                     
-                    // Remove active class from all, then add to the clicked one
-                    document.querySelectorAll('.topic-link').forEach(l => l.classList.remove('active'));
+                    document.querySelectorAll('.topic-detail-link').forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
 
-                    // Close the sidebar on mobile after a selection
+                    displayTopicContent(currentCategoryKey, currentSubCategoryKey, topicKey); 
+                    
                     if (window.innerWidth <= 768) {
                         sidebar.classList.remove('open');
                     }
@@ -583,23 +829,39 @@
 
                 topicListContainer.appendChild(link);
             });
+            
+            // 2. Display the content for the very first topic 
+            const firstTopicKey = topicKeys[0];
+            if (firstTopicKey) {
+                displayTopicContent(currentCategoryKey, currentSubCategoryKey, firstTopicKey);
+                const firstTopicLink = document.querySelector(`#topic-list-container [data-topic-key="${firstTopicKey}"]`);
+                if (firstTopicLink) {
+                    firstTopicLink.classList.add('active');
+                }
+            } else {
+                initialMessage.style.display = 'block'; 
+                contentDetails.style.display = 'none';
+            }
         }
 
-        function displayTopicContent(categoryKey, topicKey) {
-            const topic = interviewData.menu[categoryKey].topics[topicKey];
-
+        /**
+         * Displays the content of the selected topic (Level 3).
+         */
+        function displayTopicContent(categoryKey, subCategoryKey, topicKey) {
+            const topic = interviewData.menu[categoryKey].categories[subCategoryKey].topics[topicKey];
+            
             if (!topic) return;
 
-            showTopicContentArea(); // Ensure settings page is hidden
+            showTopicContentArea(); 
             
             // 1. Topic Title and Definition
             document.getElementById('detail-topic-name').textContent = topic.title;
-            document.getElementById('detail-definition').textContent = topic.definition;
+            document.getElementById('detail-definition').textContent = topic.definition || 'No definition available.'; 
 
             // 2. Interview Key Points (List)
             const keyPointsList = document.getElementById('detail-key-points');
-            keyPointsList.innerHTML = '';
             const keyPointsCard = document.getElementById('key-points-card');
+            keyPointsList.innerHTML = '';
             if (topic.interview_key_points && topic.interview_key_points.length > 0) {
                 topic.interview_key_points.forEach(point => {
                     const li = document.createElement('li');
@@ -613,8 +875,8 @@
             
             // 3. Questions & Answers (List)
             const qaList = document.getElementById('detail-qa');
-            qaList.innerHTML = '';
             const qaCard = document.getElementById('qa-card');
+            qaList.innerHTML = '';
             if (topic.qa && topic.qa.length > 0) {
                 topic.qa.forEach(item => {
                     const li = document.createElement('li');
@@ -650,17 +912,38 @@
         // --------------------------------------------------------------------------------------
         // 5. INITIALIZATION
         // --------------------------------------------------------------------------------------
+        async function loadAndInitialize(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} (Check if '${url}' exists in the same folder)`);
+                }
+                interviewData = await response.json();
+                
+                loadSettings(); 
+                renderMainMenu();
+                
+                // Load the first category and its first topic
+                const firstCategoryKey = Object.keys(interviewData.menu)[0];
+                if (firstCategoryKey) {
+                    switchCategory(firstCategoryKey);
+                } else {
+                    document.getElementById('initial-message').style.display = 'block'; 
+                }
+
+            } catch (error) {
+                console.error("Error loading or parsing JSON data:", error);
+                document.getElementById('initial-message').innerHTML = `
+                    <h3>Data Loading Error!</h3>
+                    <p>Could not load interview data. Please ensure 'data.json' is correct and accessible.</p>
+                    <p>Error details: ${error.message}</p>
+                `;
+                document.getElementById('initial-message').style.display = 'block'; 
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadSettings(); // Load theme and color first
-            renderMainMenu();
-            
-            const firstCategoryKey = Object.keys(interviewData.menu)[0];
-            if (firstCategoryKey) {
-                switchCategory(firstCategoryKey);
-            } else {
-                initialMessage.style.display = 'block'; // Show welcome message if no data exists
-            }
+            loadAndInitialize('data.json'); 
         });
     </script>
 </body>
