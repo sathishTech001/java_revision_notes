@@ -1,6 +1,9 @@
 {
-  "menu": {
-    "java_basics": {
+  "menu":{
+    "java":{
+      "title": "Java Programming",
+      "categories": {
+            "java_basics": {
       "title": "Java Basics",
       "topics": {
         "jvm_jre_jdk": {
@@ -426,6 +429,8 @@
           ],
           "example": ""
         }
+      }
+    }
       }
     }
   }
