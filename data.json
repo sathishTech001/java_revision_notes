@@ -1,436 +1,519 @@
 {
-  "menu":{
-    "java":{
+  "menu": {
+    "java": {
       "title": "Java Programming",
       "categories": {
-            "java_basics": {
-      "title": "Java Basics",
-      "topics": {
-        "jvm_jre_jdk": {
-          "title": "JVM / JRE / JDK",
-          "definition": "JVM executes bytecode; JRE provides the runtime (JVM + core libs); JDK includes developer tools (compiler, debugger) and JRE.",
-          "interview_key_points": [
-            "Difference between JDK, JRE, JVM",
-            "Platform independence via bytecode",
-            "Class loading process (bootstrap, extension, application)"
-          ],
-          "code_example": "",
-          "qa": [
-            {
-              "q": "What's the difference between JDK, JRE and JVM?",
-              "a": "JVM runs bytecode, JRE bundles JVM + libraries, JDK includes tools like javac and the JRE."
-            }
-          ],
-          "example": "java -version"
-        },
-        "primitive_vs_reference": {
-          "title": "Primitive vs Reference Types",
-          "definition": "Primitive types store raw values (int, boolean, etc.); reference types store pointers to objects (String, arrays, custom objects).",
-          "interview_key_points": [
-            "Default values (int->0, object->null)",
-            "Passing primitives vs references to methods (by value)",
-            "Autoboxing/unboxing cost"
-          ],
-          "code_example": "int a = 5;\nInteger b = a; // autoboxing",
-          "qa": [
-            {
-              "q": "Are objects passed by reference in Java?",
-              "a": "No — Java is pass-by-value. For objects, the reference is passed by value."
-            }
-          ],
-          "example": ""
-        },
-        "operators_control_flow": {
-          "title": "Operators & Control Flow",
-          "definition": "Java includes arithmetic, relational, logical operators and control structures if/else, switch, loops (for, while).",
-          "interview_key_points": [
-            "Truth table for && vs & and || vs |",
-            "switch supports strings (since Java 7)",
-            "Common pitfalls: fall-through in switch"
-          ],
-          "code_example": "for (int i=0;i<5;i++){\n  if (i==3) continue;\n  System.out.println(i);\n}",
-          "qa": [
-            {
-              "q": "When to use switch vs if-else?",
-              "a": "Use switch for multiple discrete values (enums, ints, strings) for clarity and potential performance."
-            }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "oop": {
-      "title": "OOP",
-      "topics": {
-        "classes_objects": {
-          "title": "Classes & Objects",
-          "definition": "Classes define structure and behavior; objects are instances of classes.",
-          "interview_key_points": [
-            "Constructors, default constructor",
-            "this keyword and constructor chaining",
-            "Encapsulation via private fields and getters/setters"
-          ],
-          "code_example": "public class Person {\n  private String name;\n  public Person(String name){ this.name = name; }\n  public String getName(){ return name; }\n}",
-          "qa": [
-            {
-              "q": "What is encapsulation?",
-              "a": "Encapsulation is hiding internal state and requiring all interaction to be performed through methods."
-            }
-          ],
-          "example": ""
-        },
-        "inheritance_polymorphism": {
-          "title": "Inheritance & Polymorphism",
-          "definition": "Inheritance allows classes to derive from others; polymorphism lets a reference point to objects of different types.",
-          "interview_key_points": [
-            "Method overriding vs overloading",
-            "Liskov Substitution Principle",
-            "Use of super()"
-          ],
-          "code_example": "class Animal{ void sound(){} }\nclass Dog extends Animal{ void sound(){ System.out.println(\"woof\"); }}\nAnimal a = new Dog(); a.sound(); // runtime polymorphism",
-          "qa": [
-            {
-              "q": "What's the difference between overloading and overriding?",
-              "a": "Overloading: same method name, different params (compile-time). Overriding: same signature in subclass (runtime)."
-            }
-          ],
-          "example": ""
-        },
-        "abstract_interface": {
-          "title": "Abstract Classes & Interfaces",
-          "definition": "Abstract classes can have state and implemented methods; interfaces define contracts (Java 8+ can have default/static methods).",
-          "interview_key_points": [
-            "When to use abstract class vs interface",
-            "Default and static methods in interfaces (since Java 8)",
-            "Functional interfaces (single abstract method)"
-          ],
-          "code_example": "interface Fly{ default void takeOff(){ System.out.println(\"taking off\"); } }\nabstract class Vehicle{ abstract void drive(); }",
-          "qa": [
-            {
-              "q": "Can interfaces have fields?",
-              "a": "Interfaces can have public static final constants, but not instance fields."
-            }
-          ],
-          "example": ""
-        },
-        "encapsulation": {
-          "title": "Encapsulation",
-          "definition": "Restrict direct access to fields and expose controlled operations via methods.",
-          "interview_key_points": [
-            "Use private fields + getters/setters",
-            "Immutable classes (final fields, no setters)",
-            "Benefits: maintain invariants, hide implementation"
-          ],
-          "code_example": "public final class ImmutablePoint{ private final int x,y; public ImmutablePoint(int x,int y){this.x=x;this.y=y;} public int getX(){return x;} }",
-          "qa": [],
-          "example": ""
-        }
-      }
-    },
-    "collections": {
-      "title": "Collections Framework",
-      "topics": {
-        "list_set_map": {
-          "title": "List, Set, Map",
-          "definition": "Core collection interfaces: List (ordered, indexable), Set (unique), Map (key-value).",
-          "interview_key_points": [
-            "ArrayList vs LinkedList — random access vs insertion cost",
-            "HashSet vs TreeSet — hashing vs ordering",
-            "HashMap internal structure and resize behaviour"
-          ],
-          "code_example": "List<String> a = new ArrayList<>(); a.add(\"x\");\nMap<String,Integer> m = new HashMap<>(); m.put(\"k\",1);",
-          "qa": [
-            {
-              "q": "When to use LinkedList over ArrayList?",
-              "a": "LinkedList is useful when frequent insertions/removals in middle and iteration are needed; ArrayList is better for random access."
+        "java_basics": {
+          "title": "Java Basics",
+          "topics": {
+            "basic_syntax": {
+              "title": "Basic Syntax & Program Structure",
+              "definition": "Java program entry point, compilation, packaging and basic language constructs.",
+              "interview_key_points": [
+                "public static void main(String[] args) is program entry point",
+                "javac compiles .java → .class (bytecode) which JVM executes",
+                "Packages, imports and class visibility (public, protected, default, private)"
+              ],
+              "qa": [
+                {
+                  "q": "What is the role of the JVM?",
+                  "a": "JVM loads and executes bytecode, manages memory, and provides runtime services (GC, classloading, security)."
+                },
+                {
+                  "q": "How do you compile and run a Java program?",
+                  "a": "javac MyApp.java → produces MyApp.class; run with java MyApp."
+                }
+              ],
+              "code_example": "public class Hello { public static void main(String[] args) { System.out.println(\"Hello\"); } }",
+              "example": "javac Hello.java\njava Hello"
             },
-            {
-              "q": "What causes HashMap to rehash?",
-              "a": "When load factor threshold (default 0.75) is exceeded, capacity doubles and entries are rehashed."
+            "jvm_jre_jdk": {
+              "title": "JVM / JRE / JDK",
+              "definition": "JVM executes bytecode; JRE contains JVM + runtime libraries; JDK includes JRE + developer tools (javac, javadoc).",
+              "interview_key_points": [
+                "JDK contains tools for development, JRE is runtime only",
+                "Bytecode enables platform independence",
+                "Classloader hierarchy: bootstrap, platform, application (parent delegation)"
+              ],
+              "qa": [
+                {
+                  "q": "What's the difference between JDK, JRE and JVM?",
+                  "a": "JVM executes bytecode; JRE = JVM + libraries; JDK = JRE + developer tools."
+                }
+              ],
+              "code_example": "",
+              "example": "java -version"
+            },
+            "primitive_vs_reference": {
+              "title": "Primitive vs Reference Types",
+              "definition": "Primitive types store raw values (int, boolean, etc.); reference types store pointers to objects (String, arrays, custom objects).",
+              "interview_key_points": [
+                "Default values (int->0, object->null)",
+                "Passing primitives vs references to methods (by value)",
+                "Autoboxing/unboxing cost"
+              ],
+              "qa": [
+                {
+                  "q": "Are objects passed by reference in Java?",
+                  "a": "No — Java is pass-by-value. For objects, the reference is passed by value."
+                }
+              ],
+              "code_example": "int a = 5;\nInteger b = a; // autoboxing",
+              "example": ""
+            },
+            "operators_control_flow": {
+              "title": "Operators & Control Flow",
+              "definition": "Java includes arithmetic, relational, logical operators and control structures if/else, switch, loops (for, while).",
+              "interview_key_points": [
+                "Short-circuit vs non-short-circuit operators (&& vs &)",
+                "switch supports strings (since Java 7)",
+                "Common pitfalls: fall-through in switch"
+              ],
+              "qa": [
+                {
+                  "q": "When to use switch vs if-else?",
+                  "a": "Use switch for multiple discrete values (enums, ints, strings) for clarity and potential performance."
+                }
+              ],
+              "code_example": "for (int i = 0; i < 5; i++) {\n  if (i == 3) continue;\n  System.out.println(i);\n}",
+              "example": ""
             }
-          ],
-          "example": ""
+          }
         },
-        "concurrent_collections": {
-          "title": "Concurrent Collections",
-          "definition": "Collections designed for multi-threaded access (ConcurrentHashMap, CopyOnWriteArrayList).",
-          "interview_key_points": [
-            "ConcurrentHashMap segments (pre-Java 8) and striped locking",
-            "CopyOnWriteArrayList suits read-heavy workloads",
-            "Differences from synchronizedMap"
-          ],
-          "code_example": "ConcurrentHashMap<String,Integer> cm = new ConcurrentHashMap<>();",
-          "qa": [
-            {
-              "q": "Why use ConcurrentHashMap instead of synchronized HashMap?",
-              "a": "ConcurrentHashMap offers better concurrency and avoids locking the whole map for reads or segment-level locking (implementation differs by Java version)."
+        "oop": {
+          "title": "Object-Oriented Programming (OOP)",
+          "topics": {
+            "oop_principles": {
+              "title": "OOP Principles",
+              "definition": "Encapsulation, Abstraction, Inheritance, and Polymorphism are the pillars of object-oriented design.",
+              "interview_key_points": [
+                "Encapsulation: hide fields and expose behavior",
+                "Polymorphism: method overriding and substitutability",
+                "Abstraction: model essential behavior via interfaces/abstract classes"
+              ],
+              "qa": [
+                {
+                  "q": "Overloading vs overriding?",
+                  "a": "Overloading: same name, different params (compile-time). Overriding: same signature in subclass (runtime dispatch)."
+                },
+                {
+                  "q": "What is Liskov Substitution Principle?",
+                  "a": "Subtypes must be substitutable for their base types without breaking behavior."
+                }
+              ],
+              "code_example": "class Animal{ void sound(){} } class Dog extends Animal{ void sound(){ System.out.println(\"woof\"); } }",
+              "example": "Use interfaces for capabilities (Comparable, Runnable)."
+            },
+            "classes_objects": {
+              "title": "Classes, Objects & Constructors",
+              "definition": "Classes define fields and methods; constructors initialize objects; static fields belong to class, instance fields to object.",
+              "interview_key_points": [
+                "Default constructor provided if none declared",
+                "this() for constructor chaining, super() to call parent constructor",
+                "Static initialization block runs once when class initialized"
+              ],
+              "qa": [
+                {
+                  "q": "What is a default constructor?",
+                  "a": "A no-arg constructor automatically provided if no constructors are defined."
+                },
+                {
+                  "q": "What is constructor chaining?",
+                  "a": "Calling another constructor in the same class via this(...) or parent via super(...)."
+                }
+              ],
+              "code_example": "public class Person { private String name; public Person(String name){ this.name = name; } public String getName(){ return name; } }",
+              "example": ""
+            },
+            "abstract_interface": {
+              "title": "Abstract Classes & Interfaces",
+              "definition": "Abstract classes can have state and implemented methods; interfaces define contracts (Java 8+ can have default/static methods).",
+              "interview_key_points": [
+                "When to use abstract class vs interface",
+                "Default and static methods in interfaces (since Java 8)",
+                "Functional interfaces (single abstract method)"
+              ],
+              "qa": [
+                {
+                  "q": "Can interfaces have fields?",
+                  "a": "Interfaces can have public static final constants, but not instance fields."
+                }
+              ],
+              "code_example": "interface Fly{ default void takeOff(){ System.out.println(\"taking off\"); } }\nabstract class Vehicle{ abstract void drive(); }",
+              "example": ""
+            },
+            "encapsulation": {
+              "title": "Encapsulation",
+              "definition": "Restrict direct access to fields and expose controlled operations via methods.",
+              "interview_key_points": [
+                "Use private fields + getters/setters",
+                "Immutable classes (final fields, no setters)",
+                "Benefits: maintain invariants, hide implementation"
+              ],
+              "qa": [],
+              "code_example": "public final class ImmutablePoint{ private final int x,y; public ImmutablePoint(int x,int y){this.x=x;this.y=y;} public int getX(){return x;} }",
+              "example": ""
             }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "exceptions": {
-      "title": "Exception Handling",
-      "topics": {
-        "try_catch_finally": {
-          "title": "try / catch / finally",
-          "definition": "Mechanism to catch and handle exceptions; finally executes regardless of exceptions to release resources.",
-          "interview_key_points": [
-            "Checked exceptions vs unchecked (RuntimeException)",
-            "try-with-resources (since Java 7)",
-            "Best practices: don't swallow exceptions"
-          ],
-          "code_example": "try (BufferedReader r = new BufferedReader(new FileReader(\"f\"))){ String s = r.readLine(); } catch(IOException e){ e.printStackTrace(); }",
-          "qa": [
-            {
-              "q": "What is try-with-resources?",
-              "a": "A try construct that automatically closes resources implementing AutoCloseable at the end of block."
-            }
-          ],
-          "example": ""
+          }
         },
-        "custom_exceptions": {
-          "title": "Custom Exceptions",
-          "definition": "Define domain-specific exceptions by extending Exception or RuntimeException.",
-          "interview_key_points": [
-            "When to create checked vs unchecked custom exceptions",
-            "Include useful messages and constructors"
-          ],
-          "code_example": "class MyAppException extends Exception{ public MyAppException(String msg){ super(msg); } }",
-          "qa": [
-            {
-              "q": "Should custom exceptions extend Exception or RuntimeException?",
-              "a": "If callers are expected to handle the error, use checked Exception; for programming errors, use RuntimeException."
+        "collections": {
+          "title": "Collections Framework",
+          "topics": {
+            "list_set_map": {
+              "title": "List, Set, Map",
+              "definition": "Core collection interfaces: List (ordered, indexable), Set (unique), Map (key-value).",
+              "interview_key_points": [
+                "ArrayList vs LinkedList — random access vs insertion cost",
+                "HashSet vs TreeSet — hashing vs ordering",
+                "HashMap internal structure and resize behaviour"
+              ],
+              "qa": [
+                {
+                  "q": "When to use LinkedList over ArrayList?",
+                  "a": "LinkedList is useful when frequent insertions/removals in middle and iteration are needed; ArrayList is better for random access."
+                },
+                {
+                  "q": "What causes HashMap to rehash?",
+                  "a": "When load factor threshold (default 0.75) is exceeded, capacity doubles and entries are rehashed."
+                }
+              ],
+              "code_example": "List<String> a = new ArrayList<>(); a.add(\"x\");\nMap<String,Integer> m = new HashMap<>(); m.put(\"k\",1);",
+              "example": ""
+            },
+            "concurrent_collections": {
+              "title": "Concurrent Collections",
+              "definition": "Collections designed for multi-threaded access (ConcurrentHashMap, CopyOnWriteArrayList).",
+              "interview_key_points": [
+                "ConcurrentHashMap segments (pre-Java 8) and striped locking",
+                "CopyOnWriteArrayList suits read-heavy workloads",
+                "Differences from synchronizedMap"
+              ],
+              "qa": [
+                {
+                  "q": "Why use ConcurrentHashMap instead of synchronized HashMap?",
+                  "a": "ConcurrentHashMap offers better concurrency and avoids locking the whole map for reads or segment-level locking (implementation differs by Java version)."
+                }
+              ],
+              "code_example": "ConcurrentHashMap<String,Integer> cm = new ConcurrentHashMap<>();",
+              "example": ""
             }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "multithreading": {
-      "title": "Multithreading & Concurrency",
-      "topics": {
-        "thread_lifecycle": {
-          "title": "Thread lifecycle & creation",
-          "definition": "Threads can be created by extending Thread or implementing Runnable/Callable and executed via ExecutorService.",
-          "interview_key_points": [
-            "Thread states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
-            "Prefer Executors over raw Threads",
-            "Callable returns value and supports exceptions"
-          ],
-          "code_example": "ExecutorService ex = Executors.newFixedThreadPool(4);\nex.submit(() -> { return \"ok\"; });\nex.shutdown();",
-          "qa": [
-            {
-              "q": "Why use ExecutorService?",
-              "a": "It manages thread lifecycle, pooling, and task scheduling more efficiently than creating raw threads."
-            }
-          ],
-          "example": ""
+          }
         },
-        "synchronization": {
-          "title": "Synchronization & Locks",
-          "definition": "Mechanisms to coordinate access to shared state: synchronized, ReentrantLock, volatile, atomic classes.",
-          "interview_key_points": [
-            "volatile visibility vs synchronized atomicity",
-            "ReentrantLock features (tryLock, fairness)",
-            "Use java.util.concurrent.atomic for lock-free updates"
-          ],
-          "code_example": "synchronized(this){ // critical section }\nReentrantLock lock = new ReentrantLock(); lock.lock(); try{} finally{ lock.unlock(); }",
-          "qa": [
-            {
-              "q": "What does volatile guarantee?",
-              "a": "Volatile ensures visibility (reads see latest writes) but does not provide atomicity for compound actions."
+        "exceptions": {
+          "title": "Exception Handling",
+          "topics": {
+            "try_catch_finally": {
+              "title": "try / catch / finally",
+              "definition": "Mechanism to catch and handle exceptions; finally executes regardless of exceptions to release resources.",
+              "interview_key_points": [
+                "Checked exceptions vs unchecked (RuntimeException)",
+                "try-with-resources (since Java 7)",
+                "Best practices: don't swallow exceptions"
+              ],
+              "qa": [
+                {
+                  "q": "What is try-with-resources?",
+                  "a": "A try construct that automatically closes resources implementing AutoCloseable at the end of block."
+                }
+              ],
+              "code_example": "try (BufferedReader r = new BufferedReader(new FileReader(\"f\"))){ String s = r.readLine(); } catch(IOException e){ e.printStackTrace(); }",
+              "example": ""
+            },
+            "custom_exceptions": {
+              "title": "Custom Exceptions",
+              "definition": "Define domain-specific exceptions by extending Exception or RuntimeException.",
+              "interview_key_points": [
+                "When to create checked vs unchecked custom exceptions",
+                "Include useful messages and constructors"
+              ],
+              "qa": [
+                {
+                  "q": "Should custom exceptions extend Exception or RuntimeException?",
+                  "a": "If callers are expected to handle the error, use checked Exception; for programming errors, use RuntimeException."
+                }
+              ],
+              "code_example": "class MyAppException extends Exception{ public MyAppException(String msg){ super(msg); } }",
+              "example": ""
             }
-          ],
-          "example": ""
+          }
         },
-        "deadlock": {
-          "title": "Deadlock & Livelock",
-          "definition": "Deadlock occurs when two or more threads wait indefinitely for locks held by each other; livelock when threads repeatedly change state without progress.",
-          "interview_key_points": [
-            "Avoid nested locks or use timeout tryLock",
-            "Lock ordering and resource hierarchy prevent deadlock",
-            "Detect via thread dumps"
-          ],
-          "code_example": "Object a = new Object(), b = new Object();\n// thread1 synchronizes a then b; thread2 synchronizes b then a -> potential deadlock",
-          "qa": [
-            {
-              "q": "How to prevent deadlocks?",
-              "a": "Acquire locks in a consistent order, use tryLock with timeout, or reduce lock granularity."
+        "multithreading": {
+          "title": "Multithreading & Concurrency",
+          "topics": {
+            "thread_lifecycle": {
+              "title": "Thread lifecycle & creation",
+              "definition": "Threads can be created by extending Thread or implementing Runnable/Callable and executed via ExecutorService.",
+              "interview_key_points": [
+                "Thread states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
+                "Prefer Executors over raw Threads",
+                "Callable returns value and supports exceptions"
+              ],
+              "qa": [
+                {
+                  "q": "Why use ExecutorService?",
+                  "a": "It manages thread lifecycle, pooling, and task scheduling more efficiently than creating raw threads."
+                }
+              ],
+              "code_example": "ExecutorService ex = Executors.newFixedThreadPool(4);\nex.submit(() -> { return \"ok\"; });\nex.shutdown();",
+              "example": ""
+            },
+            "synchronization": {
+              "title": "Synchronization & Locks",
+              "definition": "Mechanisms to coordinate access to shared state: synchronized, ReentrantLock, volatile, atomic classes.",
+              "interview_key_points": [
+                "volatile visibility vs synchronized atomicity",
+                "ReentrantLock features (tryLock, fairness)",
+                "Use java.util.concurrent.atomic for lock-free updates"
+              ],
+              "qa": [
+                {
+                  "q": "What does volatile guarantee?",
+                  "a": "Volatile ensures visibility (reads see latest writes) but does not provide atomicity for compound actions."
+                }
+              ],
+              "code_example": "synchronized(this){ // critical section }\nReentrantLock lock = new ReentrantLock(); lock.lock(); try{} finally{ lock.unlock(); }",
+              "example": ""
+            },
+            "deadlock": {
+              "title": "Deadlock & Livelock",
+              "definition": "Deadlock occurs when two or more threads wait indefinitely for locks held by each other; livelock when threads repeatedly change state without progress.",
+              "interview_key_points": [
+                "Avoid nested locks or use timeout tryLock",
+                "Lock ordering and resource hierarchy prevent deadlock",
+                "Detect via thread dumps"
+              ],
+              "qa": [
+                {
+                  "q": "How to prevent deadlocks?",
+                  "a": "Acquire locks in a consistent order, use tryLock with timeout, or reduce lock granularity."
+                }
+              ],
+              "code_example": "Object a = new Object(), b = new Object();\n// thread1 synchronizes a then b; thread2 synchronizes b then a -> potential deadlock",
+              "example": ""
             }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "jvm_memory": {
-      "title": "JVM Internals & Memory",
-      "topics": {
-        "memory_model": {
-          "title": "Java Memory Model (JMM)",
-          "definition": "Defines how threads interact through memory, visibility guarantees, and happens-before relationships.",
-          "interview_key_points": [
-            "happens-before rules",
-            "visibility and ordering (volatile, synchronized)",
-            "Safe publication"
-          ],
-          "code_example": "",
-          "qa": [
-            {
-              "q": "What is happens-before?",
-              "a": "A partial ordering of operations establishing visibility and ordering guarantees between threads."
-            }
-          ],
-          "example": ""
+          }
         },
-        "garbage_collection": {
-          "title": "Garbage Collection (GC)",
-          "definition": "Automatic memory management. Generational collectors divide heap into young/old; various collectors trade off throughput/latency.",
-          "interview_key_points": [
-            "Minor vs major GC",
-            "Common collectors: Serial, Parallel, CMS, G1, ZGC",
-            "Tuning: heap size, GC logs"
-          ],
-          "code_example": "",
-          "qa": [
-            {
-              "q": "What is the difference between minor and major GC?",
-              "a": "Minor GC collects the young generation; major (full) GC collects the old generation and is more expensive."
+        "jvm_memory": {
+          "title": "JVM Internals & Memory",
+          "topics": {
+            "memory_model": {
+              "title": "Java Memory Model (JMM)",
+              "definition": "Defines how threads interact through memory, visibility guarantees, and happens-before relationships.",
+              "interview_key_points": [
+                "Happens-before ensures visibility across threads",
+                "volatile establishes a happens-before relationship",
+                "Safe publication ensures objects are visible to other threads correctly"
+              ],
+              "qa": [
+                {
+                  "q": "What is a happens-before relationship?",
+                  "a": "A set of rules that guarantee memory visibility and ordering between actions (reads/writes) across threads."
+                }
+              ],
+              "code_example": "",
+              "example": ""
+            },
+            "garbage_collection": {
+              "title": "Garbage Collection (GC)",
+              "definition": "Automatic memory reclamation. Multiple collectors trade off throughput vs latency (Serial, Parallel, CMS, G1, ZGC).",
+              "interview_key_points": [
+                "Generational GC: young (eden + survivor) and old generations",
+                "Minor GC vs Full GC impact and tuning",
+                "Use GC logs and tools (jstat, jmap, jvisualvm) for diagnosis"
+              ],
+              "qa": [
+                {
+                  "q": "What triggers a full GC?",
+                  "a": "Promotion failures, explicit System.gc calls (advised against), or old generation fragmentation/thresholds."
+                }
+              ],
+              "code_example": "",
+              "example": ""
             }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "generics": {
-      "title": "Generics",
-      "topics": {
-        "generics_basics": {
-          "title": "Generics & Type Erasure",
-          "definition": "Generics provide compile-time type safety; type erasure removes generic type info at runtime in Java.",
-          "interview_key_points": [
-            "Wildcard types: ?, ? extends T, ? super T",
-            "Type erasure implications (can't new T[])",
-            "Generics with collections"
-          ],
-          "code_example": "List<? extends Number> nums = new ArrayList<Integer>();",
-          "qa": [
-            {
-              "q": "What is PECS?",
-              "a": "Producer Extends, Consumer Super — guideline for choosing extends/super with generics."
-            }
-          ],
-          "example": ""
-        }
-      }
-    },
-    "java8_features": {
-      "title": "Java 8+ Features",
-      "topics": {
-        "lambdas_streams": {
-          "title": "Lambdas & Streams",
-          "definition": "Functional-style operations and lazy pipelines for collections; lambdas provide inline function implementations.",
-          "interview_key_points": [
-            "Stream operations: map, filter, reduce, collect",
-            "Stateless vs stateful operations",
-            "Short-circuiting operations (findFirst, anyMatch)"
-          ],
-          "code_example": "List<String> names = Arrays.asList(\"a\",\"bb\",\"ccc\");\nlong count = names.stream().filter(s->s.length()>1).count();",
-          "qa": [
-            {
-              "q": "When to use streams vs loops?",
-              "a": "Streams provide concise declarative code and easy parallelism; loops may be clearer for simple mutable state updates."
-            }
-          ],
-          "example": ""
+          }
         },
-        "optional": {
-          "title": "Optional",
-          "definition": "Container to represent optional values and help avoid NullPointerException by explicit APIs.",
-          "interview_key_points": [
-            "Avoid using Optional for fields; prefer return values",
-            "Use methods like orElse, orElseGet, map, flatMap"
-          ],
-          "code_example": "Optional<String> s = Optional.ofNullable(getName()); s.ifPresent(System.out::println);",
-          "qa": [],
-          "example": ""
-        }
-      }
-    },
-    "io_nio": {
-      "title": "I/O & NIO",
-      "topics": {
-        "io_streams": {
-          "title": "Streams (I/O)",
-          "definition": "Legacy java.io streams for byte/character I/O; java.nio provides buffers and channels for non-blocking I/O.",
-          "interview_key_points": [
-            "Use try-with-resources for streams",
-            "NIO buffers and selectors for scalable I/O",
-            "Files API (java.nio.file) for simple file ops"
-          ],
-          "code_example": "Files.lines(Paths.get(\"file.txt\")).forEach(System.out::println);",
-          "qa": [],
-          "example": ""
-        }
-      }
-    },
-    "jdbc": {
-      "title": "JDBC & Databases",
-      "topics": {
-        "jdbc_basics": {
-          "title": "JDBC Basics",
-          "definition": "JDBC is the standard API for relational database access from Java using Drivers, Connections, Statements and ResultSets.",
-          "interview_key_points": [
-            "Use PreparedStatement to avoid SQL injection",
-            "Manage resources with try-with-resources",
-            "Connection pooling for performance"
-          ],
-          "code_example": "try (Connection c = ds.getConnection(); PreparedStatement ps = c.prepareStatement(\"SELECT * FROM t WHERE id=?\")){\n  ps.setInt(1,1);\n  try (ResultSet rs = ps.executeQuery()) { while(rs.next()){} }\n}",
-          "qa": [],
-          "example": ""
-        }
-      }
-    },
-    "serialization": {
-      "title": "Serialization",
-      "topics": {
-        "java_serializable": {
-          "title": "Serializable & Externalizable",
-          "definition": "Mechanisms for converting objects to bytes. Serializable is default (marker interface) while Externalizable offers custom read/write.",
-          "interview_key_points": [
-            "serialVersionUID importance",
-            "Transient fields not serialized",
-            "Security and compatibility concerns"
-          ],
-          "code_example": "class Person implements Serializable{ private static final long serialVersionUID=1L; private String name; }",
-          "qa": [],
-          "example": ""
-        }
-      }
-    },
-    "design_patterns": {
-      "title": "Common Design Patterns",
-      "topics": {
-        "singleton_factory_strategy": {
-          "title": "Singleton, Factory, Strategy (Examples)",
-          "definition": "Common creational and behavioral patterns used widely in Java codebases.",
-          "interview_key_points": [
-            "Singleton pitfalls with multithreading and serialization",
-            "Factory for decoupling creation logic",
-            "Strategy for swapping algorithms at runtime"
-          ],
-          "code_example": "public enum Singleton{ INSTANCE; }\n// Strategy pattern: interface + implementations + context",
-          "qa": [
-            {
-              "q": "Why use enum for singleton?",
-              "a": "Enum-based singleton avoids reflection and serialization problems and is thread-safe."
+        "generics": {
+          "title": "Generics & Type Safety",
+          "topics": {
+            "generics_basics": {
+              "title": "Generics & Type Erasure",
+              "definition": "Generics enable compile-time type checks. Java implements generics via type erasure — generic type information is not present at runtime.",
+              "interview_key_points": [
+                "Wildcards: ?, ? extends T (producer), ? super T (consumer) — PECS rule",
+                "Cannot create arrays of parameterized types (new T[])",
+                "Type erasure implications for instanceof and reflection"
+              ],
+              "qa": [
+                {
+                  "q": "What is PECS?",
+                  "a": "Producer Extends, Consumer Super — guideline for deciding wildcard usage."
+                }
+              ],
+              "code_example": "List<? extends Number> nums = new ArrayList<Integer>();",
+              "example": ""
             }
-          ],
-          "example": ""
+          }
+        },
+        "java8_features": {
+          "title": "Java 8+ Features",
+          "topics": {
+            "lambdas_streams": {
+              "title": "Lambdas & Streams",
+              "definition": "Functional programming features introduced in Java 8 enabling concise code and pipeline processing of collections.",
+              "interview_key_points": [
+                "Stream operations: map, filter, reduce, collect",
+                "Lazy evaluation and short-circuiting operations",
+                "Parallel streams vs thread pools: benchmark for specific workloads"
+              ],
+              "qa": [
+                {
+                  "q": "When should you use parallelStream?",
+                  "a": "When operations are CPU-bound, stateless, and the data size is large enough to justify parallel overhead; measure performance."
+                }
+              ],
+              "code_example": "List<String> list = Arrays.asList(\"a\",\"bb\",\"ccc\");\nlong count = list.stream().filter(s -> s.length() > 1).count();",
+              "example": ""
+            },
+            "optional": {
+              "title": "Optional",
+              "definition": "Container to explicitly model optional (nullable) return values to reduce NullPointerExceptions and signal absence.",
+              "interview_key_points": [
+                "Prefer Optional for return types, not for fields",
+                "Useful methods: map, flatMap, orElse, orElseGet, ifPresent"
+              ],
+              "qa": [],
+              "code_example": "Optional<String> name = Optional.ofNullable(getName());\nname.ifPresent(System.out::println);",
+              "example": ""
+            }
+          }
+        },
+        "io_nio": {
+          "title": "I/O & NIO",
+          "topics": {
+            "streams_files": {
+              "title": "Streams & File I/O",
+              "definition": "java.io provides streams for blocking I/O; java.nio provides buffers, channels, and selectors for scalable non-blocking I/O.",
+              "interview_key_points": [
+                "Use try-with-resources to manage streams",
+                "NIO offers selectors and non-blocking channels for high-performance servers",
+                "Files API (java.nio.file.Files) simplifies common file operations"
+              ],
+              "qa": [],
+              "code_example": "Files.lines(Paths.get(\"file.txt\")).forEach(System.out::println);",
+              "example": ""
+            }
+          }
+        },
+        "jdbc": {
+          "title": "Databases & JDBC",
+          "topics": {
+            "jdbc_basics": {
+              "title": "JDBC Basics",
+              "definition": "Standard Java API for relational database access using drivers, connections, statements, and result sets.",
+              "interview_key_points": [
+                "Use PreparedStatement to prevent SQL injection",
+                "Manage DB resources with try-with-resources",
+                "Use connection pooling for performance (HikariCP, DBCP)"
+              ],
+              "qa": [
+                {
+                  "q": "Why use PreparedStatement?",
+                  "a": "To precompile SQL and safely bind parameters preventing SQL injection attacks."
+                }
+              ],
+              "code_example": "try (Connection c = ds.getConnection(); PreparedStatement ps = c.prepareStatement(\"SELECT * FROM users WHERE id=?\")) {\n  ps.setInt(1, 1);\n  try (ResultSet rs = ps.executeQuery()) { while (rs.next()) { /* ... */ } }\n}",
+              "example": ""
+            }
+          }
+        },
+        "serialization": {
+          "title": "Serialization & Persistence",
+          "topics": {
+            "java_serialization": {
+              "title": "Serializable & Externalizable",
+              "definition": "Mechanisms to convert objects to byte streams. Serializable is marker-based; Externalizable gives full control over serialization.",
+              "interview_key_points": [
+                "serialVersionUID for compatibility",
+                "Transient fields are not serialized",
+                "Security concerns with default Java serialization"
+              ],
+              "qa": [
+                {
+                  "q": "Why define serialVersionUID?",
+                  "a": "To control compatibility across versions of a serializable class; prevents InvalidClassException on mismatch."
+                }
+              ],
+              "code_example": "class Person implements Serializable { private static final long serialVersionUID = 1L; private String name; }",
+              "example": ""
+            }
+          }
+        },
+        "design_patterns": {
+          "title": "Design Patterns & Best Practices",
+          "topics": {
+            "common_patterns": {
+              "title": "Singleton, Factory, Strategy, Observer",
+              "definition": "Well-known patterns to solve recurring design problems, focusing on separation of concerns, extensibility, and testability.",
+              "interview_key_points": [
+                "Singleton with enum to avoid reflection/serialization issues",
+                "Factory to decouple creation logic from usage",
+                "Strategy to swap algorithms at runtime"
+              ],
+              "qa": [
+                {
+                  "q": "Why prefer enum singleton?",
+                  "a": "Enum singletons are simple, inherently serializable-safe, and avoid reflection pitfalls."
+                }
+              ],
+              "code_example": "public enum Singleton { INSTANCE; public void doSomething(){} }",
+              "example": ""
+            }
+          }
+        },
+        "testing_tooling": {
+          "title": "Testing & Tooling",
+          "topics": {
+            "unit_testing": {
+              "title": "Unit Testing (JUnit) & Build Tools",
+              "definition": "JUnit and testing frameworks for unit tests. Build tools like Maven/Gradle manage dependencies and build lifecycles.",
+              "interview_key_points": [
+                "Write deterministic unit tests with mocks (Mockito)",
+                "Use Maven/Gradle for reproducible builds and dependency management",
+                "Continuous Integration (CI) runs tests automatically"
+              ],
+              "qa": [
+                {
+                  "q": "What is a unit test?",
+                  "a": "A small, fast test verifying a single unit of code in isolation."
+                }
+              ],
+              "code_example": "@Test public void testAdd(){ assertEquals(5, calculator.add(2,3)); }",
+              "example": ""
+            }
+          }
+        },
+        "performance": {
+          "title": "Performance & Best Practices",
+          "topics": {
+            "perf_tips": {
+              "title": "Performance Tips",
+              "definition": "Common performance considerations: avoid unnecessary object creation, use StringBuilder for concatenation in loops, choose right data structures.",
+              "interview_key_points": [
+                "Prefer StringBuilder for repeated concatenation in loops",
+                "Avoid excessive autoboxing/unboxing in hot paths",
+                "Use appropriate collection types for expected workloads"
+              ],
+              "qa": [
+                {
+                  "q": "String vs StringBuilder?",
+                  "a": "String is immutable; StringBuilder is mutable and efficient for repeated concatenation."
+                }
+              ],
+              "code_example": "StringBuilder sb = new StringBuilder(); for(String s: list) sb.append(s); String res = sb.toString();",
+              "example": "Measure first; optimize hotspots guided by profiler data."
+            }
+          }
         }
-      }
-    }
       }
     }
   }
