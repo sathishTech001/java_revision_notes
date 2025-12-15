@@ -935,6 +935,1022 @@
                     }
                 }
             }
+        },
+        "javascript": {
+            "title": "JavaScript",
+            "categories": {
+                "js_basics": {
+                    "title": "JavaScript Basics",
+                    "topics": {
+                        "what_is_js": {
+                            "title": "What is JavaScript?",
+                            "definition": "JavaScript is a lightweight, interpreted, object-based scripting language used to create dynamic and interactive web applications.",
+                            "interview_key_points": [
+                                "Runs in browser and server (Node.js)",
+                                "Single-threaded but asynchronous",
+                                "Dynamically typed language"
+                            ],
+                            "code_example": "console.log('Hello JavaScript');",
+                            "qa": [
+                                {
+                                    "q": "Is JavaScript compiled or interpreted?",
+                                    "a": "JavaScript is interpreted, but modern engines use JIT compilation."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "var_let_const": {
+                            "title": "var vs let vs const",
+                            "definition": "var is function-scoped, let and const are block-scoped.",
+                            "interview_key_points": [
+                                "var allows redeclaration",
+                                "let allows reassignment",
+                                "const prevents reassignment"
+                            ],
+                            "code_example": "let x = 10;\nconst y = 20;",
+                            "qa": [
+                                {
+                                    "q": "Why avoid var?",
+                                    "a": "var causes scope and hoisting issues."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_scope_hoisting": {
+                    "title": "Scope & Hoisting",
+                    "topics": {
+                        "scope": {
+                            "title": "Scope",
+                            "definition": "Scope defines where variables can be accessed.",
+                            "interview_key_points": [
+                                "Global scope",
+                                "Function scope",
+                                "Block scope"
+                            ],
+                            "code_example": "if(true){ let a = 10; }",
+                            "qa": [
+                                {
+                                    "q": "What is block scope?",
+                                    "a": "Variables declared with let and const exist only within the block."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "hoisting": {
+                            "title": "Hoisting",
+                            "definition": "JavaScript moves variable and function declarations to the top of scope during compilation.",
+                            "interview_key_points": [
+                                "var is hoisted with undefined",
+                                "let/const are hoisted but in TDZ",
+                                "Function declarations fully hoisted"
+                            ],
+                            "code_example": "console.log(a);\nvar a = 5;",
+                            "qa": [
+                                {
+                                    "q": "What is TDZ?",
+                                    "a": "Temporal Dead Zone where let/const cannot be accessed before declaration."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_functions": {
+                    "title": "Functions",
+                    "topics": {
+                        "function_types": {
+                            "title": "Function Types",
+                            "definition": "JavaScript supports multiple ways to define functions.",
+                            "interview_key_points": [
+                                "Function declaration",
+                                "Function expression",
+                                "Arrow function"
+                            ],
+                            "code_example": "const add = (a,b) => a + b;",
+                            "qa": [
+                                {
+                                    "q": "Difference between arrow and normal function?",
+                                    "a": "Arrow functions do not have their own this."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "closures": {
+                            "title": "Closures",
+                            "definition": "A closure is a function that remembers variables from its lexical scope.",
+                            "interview_key_points": [
+                                "Used in data hiding",
+                                "Used in callbacks",
+                                "Memory considerations"
+                            ],
+                            "code_example": "function outer(){ let x=10; return function(){ return x; }}",
+                            "qa": [
+                                {
+                                    "q": "Why are closures useful?",
+                                    "a": "They allow data encapsulation and state preservation."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_objects_arrays": {
+                    "title": "Objects & Arrays",
+                    "topics": {
+                        "objects": {
+                            "title": "Objects",
+                            "definition": "Objects store key-value pairs.",
+                            "interview_key_points": [
+                                "Object literals",
+                                "Dynamic properties",
+                                "Reference type"
+                            ],
+                            "code_example": "const user = {name:'A', age:20};",
+                            "qa": [
+                                {
+                                    "q": "How to clone an object?",
+                                    "a": "Using spread operator or Object.assign."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "arrays": {
+                            "title": "Arrays",
+                            "definition": "Arrays store ordered collections.",
+                            "interview_key_points": [
+                                "Array methods map, filter, reduce",
+                                "Mutable operations",
+                                "Zero-based index"
+                            ],
+                            "code_example": "[1,2,3].map(x=>x*2);",
+                            "qa": [
+                                {
+                                    "q": "Difference between map and forEach?",
+                                    "a": "map returns new array; forEach does not."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_async": {
+                    "title": "Asynchronous JavaScript",
+                    "topics": {
+                        "callbacks": {
+                            "title": "Callbacks",
+                            "definition": "Functions passed as arguments to be executed later.",
+                            "interview_key_points": [
+                                "Callback hell problem",
+                                "Used in async operations"
+                            ],
+                            "code_example": "setTimeout(()=>console.log('Hi'),1000);",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "promises": {
+                            "title": "Promises",
+                            "definition": "Promises represent future values.",
+                            "interview_key_points": [
+                                "States: pending, fulfilled, rejected",
+                                "then, catch, finally"
+                            ],
+                            "code_example": "fetch(url).then(res=>res.json());",
+                            "qa": [
+                                {
+                                    "q": "Why promises?",
+                                    "a": "To avoid callback hell and improve readability."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "async_await": {
+                            "title": "Async / Await",
+                            "definition": "Syntactic sugar over promises for writing async code.",
+                            "interview_key_points": [
+                                "Cleaner syntax",
+                                "Error handling using try/catch"
+                            ],
+                            "code_example": "async function load(){ await fetch(url); }",
+                            "qa": [
+                                {
+                                    "q": "Is async/await blocking?",
+                                    "a": "No, it is non-blocking."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_dom": {
+                    "title": "DOM & Browser APIs",
+                    "topics": {
+                        "dom_manipulation": {
+                            "title": "DOM Manipulation",
+                            "definition": "JavaScript can manipulate HTML using DOM APIs.",
+                            "interview_key_points": [
+                                "querySelector",
+                                "addEventListener",
+                                "Event bubbling"
+                            ],
+                            "code_example": "document.querySelector('p').textContent='Hi';",
+                            "qa": [
+                                {
+                                    "q": "What is event bubbling?",
+                                    "a": "Event propagates from child to parent."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_advanced": {
+                    "title": "Advanced JavaScript",
+                    "topics": {
+                        "this_keyword": {
+                            "title": "this keyword",
+                            "definition": "this refers to execution context.",
+                            "interview_key_points": [
+                                "Depends on how function is called",
+                                "Arrow functions inherit this"
+                            ],
+                            "code_example": "obj.method();",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "prototypes": {
+                            "title": "Prototypes",
+                            "definition": "JavaScript uses prototypal inheritance.",
+                            "interview_key_points": [
+                                "__proto__ vs prototype",
+                                "Inheritance chain"
+                            ],
+                            "code_example": "function A(){} A.prototype.run = function(){};",
+                            "qa": [
+                                {
+                                    "q": "What is prototype chain?",
+                                    "a": "Objects inherit properties through prototype links."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                }
+            }
+        },
+        "jquery": {
+            "title": "jQuery",
+            "categories": {
+                "jquery_basics": {
+                    "title": "jQuery Basics",
+                    "topics": {
+                        "what_is_jquery": {
+                            "title": "What is jQuery?",
+                            "definition": "jQuery is a fast, lightweight JavaScript library that simplifies DOM manipulation, event handling, animations, and AJAX.",
+                            "interview_key_points": [
+                                "Write less, do more",
+                                "Cross-browser compatibility",
+                                "Built on top of JavaScript"
+                            ],
+                            "code_example": "$(document).ready(function(){ console.log('Ready'); });",
+                            "qa": [
+                                {
+                                    "q": "Why was jQuery popular?",
+                                    "a": "It simplified DOM operations and handled browser inconsistencies."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "jquery_setup": {
+                            "title": "Including jQuery",
+                            "definition": "jQuery can be added via CDN or local file.",
+                            "interview_key_points": [
+                                "CDN is faster due to caching",
+                                "Local copy works offline",
+                                "Must be loaded before using $"
+                            ],
+                            "code_example": "<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_selectors": {
+                    "title": "jQuery Selectors",
+                    "topics": {
+                        "basic_selectors": {
+                            "title": "Basic Selectors",
+                            "definition": "jQuery selectors select HTML elements using CSS-style syntax.",
+                            "interview_key_points": [
+                                "Element, class, ID selectors",
+                                "Universal selector",
+                                "Group selectors"
+                            ],
+                            "code_example": "$('p'); $('.box'); $('#id');",
+                            "qa": [
+                                {
+                                    "q": "Difference between CSS selector and jQuery selector?",
+                                    "a": "Syntax is similar, but jQuery returns wrapped elements."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "attribute_selectors": {
+                            "title": "Attribute Selectors",
+                            "definition": "Select elements based on attributes.",
+                            "interview_key_points": [
+                                "[name]",
+                                "[type='text']",
+                                "[href^='http']"
+                            ],
+                            "code_example": "$(\"input[type='text']\");",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_dom": {
+                    "title": "DOM Manipulation",
+                    "topics": {
+                        "content_methods": {
+                            "title": "Content Manipulation",
+                            "definition": "Methods to get or set HTML content.",
+                            "interview_key_points": [
+                                "html()",
+                                "text()",
+                                "val()"
+                            ],
+                            "code_example": "$('#msg').text('Hello');",
+                            "qa": [
+                                {
+                                    "q": "Difference between text() and html()?",
+                                    "a": "text() sets plain text; html() sets HTML content."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "css_class_methods": {
+                            "title": "CSS & Class Methods",
+                            "definition": "Modify styles and classes dynamically.",
+                            "interview_key_points": [
+                                "addClass",
+                                "removeClass",
+                                "toggleClass",
+                                "css()"
+                            ],
+                            "code_example": "$('.box').addClass('active');",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_events": {
+                    "title": "Event Handling",
+                    "topics": {
+                        "event_methods": {
+                            "title": "Event Methods",
+                            "definition": "Attach and manage events using jQuery.",
+                            "interview_key_points": [
+                                "click, change, submit",
+                                "on() preferred",
+                                "off() removes events"
+                            ],
+                            "code_example": "$('#btn').on('click', function(){});",
+                            "qa": [
+                                {
+                                    "q": "Why use on() instead of click()?",
+                                    "a": "on() supports event delegation."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "event_delegation": {
+                            "title": "Event Delegation",
+                            "definition": "Handling events for dynamically created elements.",
+                            "interview_key_points": [
+                                "Uses event bubbling",
+                                "Better performance",
+                                "Attach handler to parent"
+                            ],
+                            "code_example": "$(document).on('click','.item',function(){});",
+                            "qa": [
+                                {
+                                    "q": "When to use event delegation?",
+                                    "a": "When elements are added dynamically."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_effects": {
+                    "title": "Effects & Animations",
+                    "topics": {
+                        "effects": {
+                            "title": "Effects",
+                            "definition": "jQuery provides built-in effects for UI interactions.",
+                            "interview_key_points": [
+                                "show/hide",
+                                "fadeIn/fadeOut",
+                                "slideUp/slideDown"
+                            ],
+                            "code_example": "$('#box').fadeIn();",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_ajax": {
+                    "title": "AJAX",
+                    "topics": {
+                        "ajax_basics": {
+                            "title": "AJAX Basics",
+                            "definition": "AJAX allows asynchronous HTTP requests without page reload.",
+                            "interview_key_points": [
+                                "$.ajax() core method",
+                                "$.get() and $.post() shortcuts",
+                                "Handles JSON/XML"
+                            ],
+                            "code_example": "$.get('/api/data', function(res){ console.log(res); });",
+                            "qa": [
+                                {
+                                    "q": "Difference between $.ajax and fetch?",
+                                    "a": "$.ajax is jQuery-based; fetch is native modern API."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_advanced": {
+                    "title": "Advanced jQuery",
+                    "topics": {
+                        "chaining": {
+                            "title": "Method Chaining",
+                            "definition": "Calling multiple jQuery methods on the same selection.",
+                            "interview_key_points": [
+                                "Improves readability",
+                                "Returns jQuery object"
+                            ],
+                            "code_example": "$('#box').addClass('a').fadeIn().css('color','red');",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "no_conflict": {
+                            "title": "noConflict()",
+                            "definition": "Avoid conflicts with other libraries using $.",
+                            "interview_key_points": [
+                                "Releases $ symbol",
+                                "Useful with multiple libraries"
+                            ],
+                            "code_example": "var jq = $.noConflict(); jq('#id').hide();",
+                            "qa": [
+                                {
+                                    "q": "When is noConflict used?",
+                                    "a": "When multiple libraries use $."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                }
+            }
+        },
+        "react": {
+            "title": "React",
+            "categories": {
+                "react_basics": {
+                    "title": "React Basics",
+                    "topics": {
+                        "what_is_react": {
+                            "title": "What is React?",
+                            "definition": "React is a JavaScript library for building user interfaces using reusable components and a virtual DOM.",
+                            "interview_key_points": [
+                                "Component-based architecture",
+                                "Virtual DOM improves performance",
+                                "Declarative UI"
+                            ],
+                            "code_example": "function App(){ return <h1>Hello React</h1>; }",
+                            "qa": [
+                                {
+                                    "q": "Is React a framework or library?",
+                                    "a": "React is a library focused on building UI."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "jsx": {
+                            "title": "JSX",
+                            "definition": "JSX is a syntax extension that allows writing HTML-like code inside JavaScript.",
+                            "interview_key_points": [
+                                "JSX compiles to React.createElement",
+                                "Must return a single parent element",
+                                "JavaScript expressions inside {}"
+                            ],
+                            "code_example": "const el = <h2>{name}</h2>;",
+                            "qa": [
+                                {
+                                    "q": "Is JSX mandatory?",
+                                    "a": "No, but it improves readability and developer experience."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_components": {
+                    "title": "Components",
+                    "topics": {
+                        "functional_components": {
+                            "title": "Functional Components",
+                            "definition": "Functions that return JSX and represent UI elements.",
+                            "interview_key_points": [
+                                "Simpler and preferred",
+                                "Uses hooks for state and lifecycle",
+                                "Reusable and testable"
+                            ],
+                            "code_example": "const Header = () => <h1>Header</h1>;",
+                            "qa": [
+                                {
+                                    "q": "Why prefer functional components?",
+                                    "a": "They are simpler, cleaner, and work well with hooks."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "class_components": {
+                            "title": "Class Components",
+                            "definition": "Components created using ES6 classes (older approach).",
+                            "interview_key_points": [
+                                "Uses this.state and this.setState",
+                                "Lifecycle methods",
+                                "Less used in modern React"
+                            ],
+                            "code_example": "class App extends React.Component { render(){ return <div/> } }",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_state_props": {
+                    "title": "State & Props",
+                    "topics": {
+                        "props": {
+                            "title": "Props",
+                            "definition": "Props are read-only data passed from parent to child components.",
+                            "interview_key_points": [
+                                "Immutable",
+                                "Used for communication",
+                                "Passed as attributes"
+                            ],
+                            "code_example": "<User name='Sathish' />",
+                            "qa": [
+                                {
+                                    "q": "Can props be modified?",
+                                    "a": "No, props are immutable."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "state": {
+                            "title": "State",
+                            "definition": "State holds mutable data within a component.",
+                            "interview_key_points": [
+                                "Managed inside component",
+                                "Triggers re-render",
+                                "useState hook"
+                            ],
+                            "code_example": "const [count,setCount] = useState(0);",
+                            "qa": [
+                                {
+                                    "q": "Difference between state and props?",
+                                    "a": "State is internal and mutable; props are external and immutable."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_hooks": {
+                    "title": "React Hooks",
+                    "topics": {
+                        "use_state": {
+                            "title": "useState",
+                            "definition": "Hook to manage state in functional components.",
+                            "interview_key_points": [
+                                "Returns state and setter",
+                                "Triggers re-render",
+                                "Multiple states allowed"
+                            ],
+                            "code_example": "const [name,setName] = useState('');",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "use_effect": {
+                            "title": "useEffect",
+                            "definition": "Hook to perform side effects in components.",
+                            "interview_key_points": [
+                                "Runs after render",
+                                "Dependency array controls execution",
+                                "Replaces lifecycle methods"
+                            ],
+                            "code_example": "useEffect(()=>{ fetchData(); },[]);",
+                            "qa": [
+                                {
+                                    "q": "What happens if dependency array is empty?",
+                                    "a": "Effect runs once after initial render."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_lifecycle": {
+                    "title": "Lifecycle & Rendering",
+                    "topics": {
+                        "lifecycle_methods": {
+                            "title": "Lifecycle Methods",
+                            "definition": "Methods that run at different phases of component life.",
+                            "interview_key_points": [
+                                "componentDidMount",
+                                "componentDidUpdate",
+                                "componentWillUnmount"
+                            ],
+                            "code_example": "",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "reconciliation": {
+                            "title": "Reconciliation",
+                            "definition": "Process by which React updates the DOM efficiently.",
+                            "interview_key_points": [
+                                "Uses Virtual DOM",
+                                "Diffing algorithm",
+                                "Keys improve performance"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "Why are keys important?",
+                                    "a": "They help React identify elements efficiently."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_routing": {
+                    "title": "Routing",
+                    "topics": {
+                        "react_router": {
+                            "title": "React Router",
+                            "definition": "Library for routing in React applications.",
+                            "interview_key_points": [
+                                "Single Page Application routing",
+                                "BrowserRouter, Routes, Route",
+                                "Dynamic routing"
+                            ],
+                            "code_example": "<Route path='/home' element={<Home/>} />",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_performance": {
+                    "title": "Performance Optimization",
+                    "topics": {
+                        "memoization": {
+                            "title": "Memoization",
+                            "definition": "Avoid unnecessary re-renders using memoization techniques.",
+                            "interview_key_points": [
+                                "React.memo",
+                                "useMemo",
+                                "useCallback"
+                            ],
+                            "code_example": "const MemoComp = React.memo(Component);",
+                            "qa": [
+                                {
+                                    "q": "When to use useCallback?",
+                                    "a": "When passing functions to child components."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "react_advanced": {
+                    "title": "Advanced React",
+                    "topics": {
+                        "context_api": {
+                            "title": "Context API",
+                            "definition": "Provides global state without prop drilling.",
+                            "interview_key_points": [
+                                "Provider and Consumer",
+                                "Avoid excessive usage",
+                                "Alternative to Redux for small apps"
+                            ],
+                            "code_example": "const ThemeContext = createContext();",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "error_boundaries": {
+                            "title": "Error Boundaries",
+                            "definition": "Components that catch JavaScript errors in child components.",
+                            "interview_key_points": [
+                                "Only class components",
+                                "Uses componentDidCatch",
+                                "Prevents app crash"
+                            ],
+                            "code_example": "",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                }
+            }
+        },
+        "spring": {
+            "title": "Spring & Spring Boot – Complete Interview Coverage",
+            "categories": {
+                "spring_basics": {
+                    "title": "Spring Basics",
+                    "topics": {
+                        "what_is_spring": {
+                            "title": "What is Spring Framework?",
+                            "definition": "Spring is a lightweight, open-source Java framework used to build enterprise applications by providing Dependency Injection, AOP, and infrastructure support.",
+                            "interview_key_points": [
+                                "Lightweight",
+                                "Dependency Injection",
+                                "Aspect Oriented Programming",
+                                "Modular architecture"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "Why do we use Spring?",
+                                    "a": "To reduce boilerplate code and build loosely coupled, maintainable applications."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "ioc": {
+                            "title": "Inversion of Control (IoC)",
+                            "definition": "IoC is a principle where object creation and dependency management are handled by the Spring container instead of the programmer.",
+                            "interview_key_points": [
+                                "Container manages objects",
+                                "Reduces tight coupling",
+                                "Implemented using DI"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "What problem does IoC solve?",
+                                    "a": "It removes tight coupling between classes."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "dependency_injection": {
+                            "title": "Dependency Injection (DI)",
+                            "definition": "DI is a design pattern where dependencies are injected into a class instead of being created by the class itself.",
+                            "interview_key_points": [
+                                "Loose coupling",
+                                "Better testability",
+                                "Cleaner code"
+                            ],
+                            "code_example": "@Autowired private Service service;",
+                            "qa": [
+                                {
+                                    "q": "Types of DI in Spring?",
+                                    "a": "Constructor, Setter, Field injection."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "spring_container": {
+                            "title": "Spring Container",
+                            "definition": "Spring container creates, manages, and controls the lifecycle of beans.",
+                            "interview_key_points": [
+                                "BeanFactory",
+                                "ApplicationContext",
+                                "Manages lifecycle"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "Difference between BeanFactory and ApplicationContext?",
+                                    "a": "ApplicationContext provides more enterprise features."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "spring_core_advanced": {
+                    "title": "Spring Core – Advanced",
+                    "topics": {
+                        "bean_lifecycle": {
+                            "title": "Spring Bean Lifecycle",
+                            "definition": "Bean lifecycle defines the stages from bean creation to destruction.",
+                            "interview_key_points": [
+                                "Instantiation",
+                                "Dependency Injection",
+                                "Initialization",
+                                "Destruction"
+                            ],
+                            "code_example": "@PostConstruct\n@PreDestroy",
+                            "qa": [
+                                {
+                                    "q": "How to customize bean lifecycle?",
+                                    "a": "Using @PostConstruct and @PreDestroy."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "bean_scopes": {
+                            "title": "Bean Scopes",
+                            "definition": "Bean scope defines how long a bean instance exists.",
+                            "interview_key_points": [
+                                "singleton (default)",
+                                "prototype",
+                                "request",
+                                "session"
+                            ],
+                            "code_example": "@Scope(\"prototype\")",
+                            "qa": [
+                                {
+                                    "q": "Default bean scope?",
+                                    "a": "Singleton."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "autowiring": {
+                            "title": "Autowiring",
+                            "definition": "Autowiring automatically injects dependent beans.",
+                            "interview_key_points": [
+                                "@Autowired",
+                                "@Qualifier",
+                                "@Primary"
+                            ],
+                            "code_example": "@Autowired @Qualifier(\"repo1\")",
+                            "qa": [
+                                {
+                                    "q": "What if multiple beans exist?",
+                                    "a": "Use @Qualifier or @Primary."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "aop": {
+                            "title": "Aspect Oriented Programming (AOP)",
+                            "definition": "AOP separates cross-cutting concerns from business logic.",
+                            "interview_key_points": [
+                                "Aspect",
+                                "Advice",
+                                "Pointcut",
+                                "Join Point"
+                            ],
+                            "code_example": "@Around(\"execution(* service.*.*(..))\")",
+                            "qa": [
+                                {
+                                    "q": "Where is AOP used?",
+                                    "a": "Logging, transactions, security."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "spring_mvc": {
+                    "title": "Spring MVC",
+                    "topics": {
+                        "what_is_mvc": {
+                            "title": "What is Spring MVC?",
+                            "definition": "Spring MVC is a web framework based on the Model-View-Controller design pattern.",
+                            "interview_key_points": [
+                                "DispatcherServlet",
+                                "Controller",
+                                "View Resolver"
+                            ],
+                            "code_example": "@Controller",
+                            "qa": [
+                                {
+                                    "q": "Role of DispatcherServlet?",
+                                    "a": "Acts as front controller."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "rest_controller": {
+                            "title": "@RestController",
+                            "definition": "Used to build RESTful APIs.",
+                            "interview_key_points": [
+                                "@Controller + @ResponseBody",
+                                "Returns JSON"
+                            ],
+                            "code_example": "@RestController",
+                            "qa": [
+                                {
+                                    "q": "Difference between @Controller and @RestController?",
+                                    "a": "@RestController returns JSON directly."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "spring_boot": {
+                    "title": "Spring Boot",
+                    "topics": {
+                        "what_is_spring_boot": {
+                            "title": "What is Spring Boot?",
+                            "definition": "Spring Boot simplifies Spring application development using auto-configuration and embedded servers.",
+                            "interview_key_points": [
+                                "Auto-configuration",
+                                "Embedded Tomcat",
+                                "Starter dependencies"
+                            ],
+                            "code_example": "@SpringBootApplication",
+                            "qa": [
+                                {
+                                    "q": "Why Spring Boot?",
+                                    "a": "Faster development with minimal configuration."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "spring_vs_spring_boot": {
+                            "title": "Spring vs Spring Boot",
+                            "definition": "Spring Boot reduces configuration compared to traditional Spring.",
+                            "interview_key_points": [
+                                "Spring uses manual config",
+                                "Spring Boot auto-configures"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "Is Spring Boot replacement for Spring?",
+                                    "a": "No, it is built on top of Spring."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "configuration": {
+                            "title": "Spring Boot Configuration",
+                            "definition": "Spring Boot uses application.properties or application.yml for configuration.",
+                            "interview_key_points": [
+                                "@Value",
+                                "@ConfigurationProperties",
+                                "Profiles"
+                            ],
+                            "code_example": "server.port=8081",
+                            "qa": [
+                                {
+                                    "q": "How to handle multiple environments?",
+                                    "a": "Using Spring Profiles."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "transaction_management": {
+                            "title": "Transaction Management",
+                            "definition": "Spring Boot supports declarative transaction management using @Transactional.",
+                            "interview_key_points": [
+                                "Rollback on runtime exception",
+                                "Propagation",
+                                "Isolation"
+                            ],
+                            "code_example": "@Transactional",
+                            "qa": [
+                                {
+                                    "q": "Default rollback behavior?",
+                                    "a": "Rollback on RuntimeException."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "spring_security": {
+                            "title": "Spring Security Basics",
+                            "definition": "Spring Security handles authentication and authorization.",
+                            "interview_key_points": [
+                                "Authentication",
+                                "Authorization",
+                                "Filters"
+                            ],
+                            "code_example": "",
+                            "qa": [
+                                {
+                                    "q": "Auth vs Authorization?",
+                                    "a": "Auth verifies user, Authorization verifies access."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                }
+            }
         }
     }
 }
