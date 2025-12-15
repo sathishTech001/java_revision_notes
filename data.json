@@ -686,6 +686,255 @@
                     }
                 }
             }
+        },
+        "css": {
+            "title": "CSS (Cascading Style Sheets)",
+            "categories": {
+                "css_basics": {
+                    "title": "CSS Basics",
+                    "topics": {
+                        "what_is_css": {
+                            "title": "What is CSS?",
+                            "definition": "CSS is a style sheet language used to describe the presentation of HTML elements.",
+                            "interview_key_points": [
+                                "CSS controls layout and appearance",
+                                "Separates content from presentation",
+                                "Improves maintainability"
+                            ],
+                            "code_example": "p { color: blue; }",
+                            "qa": [
+                                {
+                                    "q": "Why do we use CSS?",
+                                    "a": "To style and layout web pages separately from HTML structure."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "types_of_css": {
+                            "title": "Types of CSS",
+                            "definition": "CSS can be applied in three ways: inline, internal, and external.",
+                            "interview_key_points": [
+                                "Inline CSS has highest specificity",
+                                "External CSS is most maintainable",
+                                "Internal CSS used for small pages"
+                            ],
+                            "code_example": "<style>p{color:red;}</style>",
+                            "qa": [
+                                {
+                                    "q": "Which CSS type is best?",
+                                    "a": "External CSS is preferred for scalability and maintenance."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_selectors": {
+                    "title": "CSS Selectors",
+                    "topics": {
+                        "basic_selectors": {
+                            "title": "Basic Selectors",
+                            "definition": "Selectors target HTML elements to apply styles.",
+                            "interview_key_points": [
+                                "Element selector",
+                                "Class selector",
+                                "ID selector",
+                                "Universal selector"
+                            ],
+                            "code_example": "p {}\n.box {}\n#id {}\n* {}",
+                            "qa": [
+                                {
+                                    "q": "Difference between class and id selector?",
+                                    "a": "Class can be reused; id must be unique."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "pseudo_selectors": {
+                            "title": "Pseudo Classes & Elements",
+                            "definition": "Pseudo-classes define a special state; pseudo-elements style parts of elements.",
+                            "interview_key_points": [
+                                ":hover, :focus",
+                                "::before, ::after",
+                                "Used for UI effects"
+                            ],
+                            "code_example": "a:hover { color:red; }\np::before { content:\"*\"; }",
+                            "qa": [
+                                {
+                                    "q": "Difference between pseudo-class and pseudo-element?",
+                                    "a": "Pseudo-classes define states; pseudo-elements define parts."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_box_model": {
+                    "title": "CSS Box Model",
+                    "topics": {
+                        "box_model": {
+                            "title": "CSS Box Model",
+                            "definition": "Every element is a box consisting of content, padding, border, and margin.",
+                            "interview_key_points": [
+                                "Padding adds space inside",
+                                "Margin adds space outside",
+                                "Border wraps content and padding"
+                            ],
+                            "code_example": "div { margin:10px; padding:10px; }",
+                            "qa": [
+                                {
+                                    "q": "What is box-sizing?",
+                                    "a": "Controls whether padding and border are included in width/height."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_display_position": {
+                    "title": "Display & Positioning",
+                    "topics": {
+                        "display_property": {
+                            "title": "Display Property",
+                            "definition": "Controls how elements are displayed in layout.",
+                            "interview_key_points": [
+                                "block vs inline",
+                                "inline-block combines both",
+                                "display:none removes element"
+                            ],
+                            "code_example": "span { display:inline-block; }",
+                            "qa": [
+                                {
+                                    "q": "Difference between display:none and visibility:hidden?",
+                                    "a": "display:none removes element; visibility:hidden hides but keeps space."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "position_property": {
+                            "title": "Position Property",
+                            "definition": "Defines how an element is positioned in the document.",
+                            "interview_key_points": [
+                                "static, relative, absolute",
+                                "fixed, sticky",
+                                "z-index controls stacking"
+                            ],
+                            "code_example": ".box { position:absolute; top:10px; }",
+                            "qa": [
+                                {
+                                    "q": "Difference between absolute and relative?",
+                                    "a": "Absolute positions relative to nearest positioned ancestor."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_layouts": {
+                    "title": "CSS Layout Systems",
+                    "topics": {
+                        "flexbox": {
+                            "title": "Flexbox",
+                            "definition": "Flexbox is a one-dimensional layout system.",
+                            "interview_key_points": [
+                                "Main axis and cross axis",
+                                "justify-content and align-items",
+                                "Flexible layouts"
+                            ],
+                            "code_example": ".container{display:flex; justify-content:center;}",
+                            "qa": [
+                                {
+                                    "q": "Difference between Flexbox and Grid?",
+                                    "a": "Flexbox is one-dimensional; Grid is two-dimensional."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "grid": {
+                            "title": "CSS Grid",
+                            "definition": "Grid is a two-dimensional layout system.",
+                            "interview_key_points": [
+                                "Rows and columns",
+                                "Grid gap",
+                                "Template areas"
+                            ],
+                            "code_example": ".grid{display:grid; grid-template-columns:1fr 1fr;}",
+                            "qa": [
+                                {
+                                    "q": "When to use Grid?",
+                                    "a": "When layout requires rows and columns."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_responsive": {
+                    "title": "Responsive Design",
+                    "topics": {
+                        "media_queries": {
+                            "title": "Media Queries",
+                            "definition": "Media queries adapt layouts to different screen sizes.",
+                            "interview_key_points": [
+                                "Mobile-first approach",
+                                "Use breakpoints",
+                                "Responsive units"
+                            ],
+                            "code_example": "@media (max-width:768px){ body{font-size:14px;} }",
+                            "qa": [
+                                {
+                                    "q": "What is mobile-first design?",
+                                    "a": "Designing for small screens first, then scaling up."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_specificity": {
+                    "title": "Specificity & Cascade",
+                    "topics": {
+                        "specificity": {
+                            "title": "CSS Specificity",
+                            "definition": "Determines which CSS rule is applied when multiple rules match.",
+                            "interview_key_points": [
+                                "Inline > ID > Class > Element",
+                                "!important overrides all"
+                            ],
+                            "code_example": "#id { color:red; }",
+                            "qa": [
+                                {
+                                    "q": "Why is !important bad practice?",
+                                    "a": "It breaks cascade and makes debugging difficult."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "css_animations": {
+                    "title": "Transitions & Animations",
+                    "topics": {
+                        "animations": {
+                            "title": "CSS Animations",
+                            "definition": "Used to animate HTML elements.",
+                            "interview_key_points": [
+                                "Uses @keyframes",
+                                "Better performance than JS animations",
+                                "Hardware accelerated"
+                            ],
+                            "code_example": "@keyframes fade{from{opacity:0;}to{opacity:1;}}",
+                            "qa": [
+                                {
+                                    "q": "Difference between transition and animation?",
+                                    "a": "Transition requires trigger; animation runs automatically."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                }
+            }
         }
     }
 }
