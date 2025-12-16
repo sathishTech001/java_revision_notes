@@ -524,7 +524,7 @@
                     "topics": {
                         "what_is_html": {
                             "title": "What is HTML?",
-                            "definition": "HTML is a markup language used to structure content on the web using tags and elements.",
+                            "definition": "HTML is a markup language used to structure and display content on web pages using predefined tags.",
                             "interview_key_points": [
                                 "HTML is not a programming language",
                                 "HTML defines structure of web pages",
@@ -534,27 +534,31 @@
                             "qa": [
                                 {
                                     "q": "Is HTML a programming language?",
-                                    "a": "No, HTML is a markup language used to structure web content."
+                                    "a": "HTML is a markup language because it only structures content using tags and does not support programming logic like loops or conditions."
                                 }
                             ],
                             "example": ""
                         },
                         "tags_elements": {
                             "title": "Tags vs Elements",
-                            "definition": "Tags are markup keywords, while elements consist of opening tag, content, and closing tag.",
+                            "definition": "An HTML tag is a keyword enclosed within angle brackets,Tags are used to define the start and end of an element.An HTML element consists of the opening tag, the content, and the closing tag.It represents the complete structure that appears on the web page.",
                             "interview_key_points": [
                                 "Tags use angle brackets",
                                 "Elements include content",
                                 "Some elements are self-closing"
                             ],
-                            "code_example": "<p>This is a paragraph</p>",
+                            "code_example": "self closing tags \n <br>   <!-- Line break --><hr> \n  <!-- Horizontal line -->\n<img src=\"image.jpg\" alt=\"Image\">\n<input type=\"text\">\n<meta charset=\"UTF-8\">\n<link rel=\"stylesheet\" href=\"style.css\">",
                             "qa": [
                                 {
                                     "q": "What is the difference between a tag and an element?",
                                     "a": "A tag is a syntax, while an element includes tags and content together."
+                                },
+                                {
+                                    "q": "What are self-closing (void) tags in HTML? Give examples.",
+                                    "a": "Self-closing tags (also called void elements) are HTML tags that do not have closing tags and do not contain any content.They perform a single, specific function in the web page."
                                 }
                             ],
-                            "example": ""
+                            "example": "(<p>//opening tage (sample content)-content</p>//closing tags)->elements"
                         }
                     }
                 },
@@ -563,7 +567,7 @@
                     "topics": {
                         "block_inline": {
                             "title": "Block vs Inline Elements",
-                            "definition": "Block elements take full width and start on a new line; inline elements take only required space.",
+                            "definition": "Block-level elements start on a new line and take up the full width available.They can contain other block-level or inline elements.Inline elements do not start on a new line and only take up as much width as their content.They usually contain text or other inline elements.",
                             "interview_key_points": [
                                 "Block elements start on new line",
                                 "Inline elements do not break line",
@@ -574,13 +578,17 @@
                                 {
                                     "q": "Give examples of block elements.",
                                     "a": "div, p, h1"
+                                },
+                                {
+                                    "q": "What is the difference between <div> and <span>?",
+                                    "a": "div is a block-level element. It starts on a new line, takes up the full width available, and can contain both block-level and inline elements.\n span is an inline element. It does not start on a new line and only takes up the width of its content. It is mainly used for styling or grouping inline content."
                                 }
                             ],
                             "example": ""
                         },
                         "attributes": {
                             "title": "HTML Attributes",
-                            "definition": "Attributes provide additional information about HTML elements.",
+                            "definition": "HTML attributes provide additional information about an element.They are written inside the opening tag and usually come in name–value pairs.Attributes control the behavior, appearance, or identification of an element.",
                             "interview_key_points": [
                                 "Attributes are name-value pairs",
                                 "Defined in opening tag",
