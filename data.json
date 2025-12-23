@@ -947,156 +947,107 @@
         "javascript": {
             "title": "JavaScript",
             "categories": {
-                "js_basics": {
-                    "title": "JavaScript Basics",
+                "js_core_concepts": {
+                    "title": "Core JavaScript Concepts",
                     "topics": {
-                        "what_is_js": {
-                            "title": "What is JavaScript?",
-                            "definition": "JavaScript is a lightweight, interpreted, object-based scripting language used to create dynamic and interactive web applications.",
+                        "lexical_scope": {
+                            "title": "Lexical Scope",
+                            "definition": "Lexical scope means variable access is determined by where the code is written, not where it is executed.",
                             "interview_key_points": [
-                                "Runs in browser and server (Node.js)",
-                                "Single-threaded but asynchronous",
-                                "Dynamically typed language"
+                                "Scope decided at compile time",
+                                "Inner functions can access outer variables",
+                                "Foundation for closures"
                             ],
-                            "code_example": "console.log('Hello JavaScript');",
+                            "code_example": "function outer(){ let a=10; function inner(){ console.log(a); } inner(); }",
                             "qa": [
                                 {
-                                    "q": "Is JavaScript compiled or interpreted?",
-                                    "a": "JavaScript is interpreted, but modern engines use JIT compilation."
-                                }
-                            ],
-                            "example": ""
-                        },
-                        "var_let_const": {
-                            "title": "var vs let vs const",
-                            "definition": "var is function-scoped, let and const are block-scoped.",
-                            "interview_key_points": [
-                                "var allows redeclaration",
-                                "let allows reassignment",
-                                "const prevents reassignment"
-                            ],
-                            "code_example": "let x = 10;\nconst y = 20;",
-                            "qa": [
-                                {
-                                    "q": "Why avoid var?",
-                                    "a": "var causes scope and hoisting issues."
-                                }
-                            ],
-                            "example": ""
-                        }
-                    }
-                },
-                "js_scope_hoisting": {
-                    "title": "Scope & Hoisting",
-                    "topics": {
-                        "scope": {
-                            "title": "Scope",
-                            "definition": "Scope defines where variables can be accessed.",
-                            "interview_key_points": [
-                                "Global scope",
-                                "Function scope",
-                                "Block scope"
-                            ],
-                            "code_example": "if(true){ let a = 10; }",
-                            "qa": [
-                                {
-                                    "q": "What is block scope?",
-                                    "a": "Variables declared with let and const exist only within the block."
-                                }
-                            ],
-                            "example": ""
-                        },
-                        "hoisting": {
-                            "title": "Hoisting",
-                            "definition": "JavaScript moves variable and function declarations to the top of scope during compilation.",
-                            "interview_key_points": [
-                                "var is hoisted with undefined",
-                                "let/const are hoisted but in TDZ",
-                                "Function declarations fully hoisted"
-                            ],
-                            "code_example": "console.log(a);\nvar a = 5;",
-                            "qa": [
-                                {
-                                    "q": "What is TDZ?",
-                                    "a": "Temporal Dead Zone where let/const cannot be accessed before declaration."
-                                }
-                            ],
-                            "example": ""
-                        }
-                    }
-                },
-                "js_functions": {
-                    "title": "Functions",
-                    "topics": {
-                        "function_types": {
-                            "title": "Function Types",
-                            "definition": "JavaScript supports multiple ways to define functions.",
-                            "interview_key_points": [
-                                "Function declaration",
-                                "Function expression",
-                                "Arrow function"
-                            ],
-                            "code_example": "const add = (a,b) => a + b;",
-                            "qa": [
-                                {
-                                    "q": "Difference between arrow and normal function?",
-                                    "a": "Arrow functions do not have their own this."
+                                    "q": "What is lexical scope?",
+                                    "a": "Scope determined by the position of code in source."
                                 }
                             ],
                             "example": ""
                         },
                         "closures": {
                             "title": "Closures",
-                            "definition": "A closure is a function that remembers variables from its lexical scope.",
+                            "definition": "A closure is a function that remembers variables from its lexical scope even after the outer function has executed.",
                             "interview_key_points": [
-                                "Used in data hiding",
-                                "Used in callbacks",
-                                "Memory considerations"
+                                "Enabled by lexical scope",
+                                "Used for data hiding",
+                                "Can cause memory leaks if misused"
                             ],
-                            "code_example": "function outer(){ let x=10; return function(){ return x; }}",
+                            "code_example": "function counter(){ let c=0; return function(){ return ++c; } }",
                             "qa": [
                                 {
-                                    "q": "Why are closures useful?",
-                                    "a": "They allow data encapsulation and state preservation."
-                                }
-                            ],
-                            "example": ""
-                        }
-                    }
-                },
-                "js_objects_arrays": {
-                    "title": "Objects & Arrays",
-                    "topics": {
-                        "objects": {
-                            "title": "Objects",
-                            "definition": "Objects store key-value pairs.",
-                            "interview_key_points": [
-                                "Object literals",
-                                "Dynamic properties",
-                                "Reference type"
-                            ],
-                            "code_example": "const user = {name:'A', age:20};",
-                            "qa": [
-                                {
-                                    "q": "How to clone an object?",
-                                    "a": "Using spread operator or Object.assign."
+                                    "q": "Why closures are useful?",
+                                    "a": "They help preserve state and encapsulate data."
                                 }
                             ],
                             "example": ""
                         },
-                        "arrays": {
-                            "title": "Arrays",
-                            "definition": "Arrays store ordered collections.",
+                        "execution_context": {
+                            "title": "Execution Context",
+                            "definition": "Execution context is the environment in which JavaScript code is evaluated and executed.",
                             "interview_key_points": [
-                                "Array methods map, filter, reduce",
-                                "Mutable operations",
-                                "Zero-based index"
+                                "Global execution context",
+                                "Function execution context",
+                                "Creation and execution phases"
                             ],
-                            "code_example": "[1,2,3].map(x=>x*2);",
+                            "code_example": "var a=10; function test(){ console.log(a); }",
                             "qa": [
                                 {
-                                    "q": "Difference between map and forEach?",
-                                    "a": "map returns new array; forEach does not."
+                                    "q": "What happens in creation phase?",
+                                    "a": "Memory allocation and hoisting."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "call_stack": {
+                            "title": "Call Stack",
+                            "definition": "Call stack is a data structure that keeps track of function calls in JavaScript.",
+                            "interview_key_points": [
+                                "LIFO principle",
+                                "Single-threaded execution",
+                                "Stack overflow on infinite calls"
+                            ],
+                            "code_example": "function a(){ b(); } function b(){ console.log('hi'); } a();",
+                            "qa": [
+                                {
+                                    "q": "What causes stack overflow?",
+                                    "a": "Infinite or deep recursive calls."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "memory_heap": {
+                            "title": "Memory Heap",
+                            "definition": "Memory heap is where objects, arrays, and functions are stored.",
+                            "interview_key_points": [
+                                "Stores reference types",
+                                "Dynamic memory allocation",
+                                "Used with garbage collection"
+                            ],
+                            "code_example": "let obj={x:1}; let ref=obj;",
+                            "qa": [
+                                {
+                                    "q": "Where are objects stored?",
+                                    "a": "In the memory heap."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "garbage_collection": {
+                            "title": "Garbage Collection",
+                            "definition": "Garbage collection automatically removes unused objects from memory.",
+                            "interview_key_points": [
+                                "Mark and sweep algorithm",
+                                "Removes unreachable objects",
+                                "Prevents memory leaks"
+                            ],
+                            "code_example": "let a={x:1}; a=null;",
+                            "qa": [
+                                {
+                                    "q": "When is memory freed?",
+                                    "a": "When objects become unreachable."
                                 }
                             ],
                             "example": ""
@@ -1106,41 +1057,49 @@
                 "js_async": {
                     "title": "Asynchronous JavaScript",
                     "topics": {
-                        "callbacks": {
-                            "title": "Callbacks",
-                            "definition": "Functions passed as arguments to be executed later.",
+                        "event_loop": {
+                            "title": "Event Loop",
+                            "definition": "Event loop manages execution of synchronous and asynchronous code.",
                             "interview_key_points": [
-                                "Callback hell problem",
-                                "Used in async operations"
+                                "Handles async callbacks",
+                                "Uses microtask and macrotask queues",
+                                "Runs after call stack is empty"
                             ],
-                            "code_example": "setTimeout(()=>console.log('Hi'),1000);",
-                            "qa": [],
+                            "code_example": "setTimeout(()=>console.log(1)); Promise.resolve().then(()=>console.log(2));",
+                            "qa": [
+                                {
+                                    "q": "Which runs first: promise or setTimeout?",
+                                    "a": "Promise (microtask)."
+                                }
+                            ],
                             "example": ""
                         },
                         "promises": {
                             "title": "Promises",
-                            "definition": "Promises represent future values.",
+                            "definition": "Promises represent the eventual completion or failure of an async operation.",
                             "interview_key_points": [
                                 "States: pending, fulfilled, rejected",
-                                "then, catch, finally"
+                                "then, catch, finally",
+                                "Avoids callback hell"
                             ],
-                            "code_example": "fetch(url).then(res=>res.json());",
+                            "code_example": "fetch(url).then(res=>res.json()).catch(err=>console.log(err));",
                             "qa": [
                                 {
-                                    "q": "Why promises?",
-                                    "a": "To avoid callback hell and improve readability."
+                                    "q": "Why promises are better than callbacks?",
+                                    "a": "Cleaner chaining and error handling."
                                 }
                             ],
                             "example": ""
                         },
                         "async_await": {
                             "title": "Async / Await",
-                            "definition": "Syntactic sugar over promises for writing async code.",
+                            "definition": "Async/await is syntactic sugar over promises for writing cleaner async code.",
                             "interview_key_points": [
-                                "Cleaner syntax",
-                                "Error handling using try/catch"
+                                "async returns promise",
+                                "await pauses execution",
+                                "Uses try/catch for errors"
                             ],
-                            "code_example": "async function load(){ await fetch(url); }",
+                            "code_example": "async function load(){ const res=await fetch(url); }",
                             "qa": [
                                 {
                                     "q": "Is async/await blocking?",
@@ -1148,57 +1107,185 @@
                                 }
                             ],
                             "example": ""
-                        }
-                    }
-                },
-                "js_dom": {
-                    "title": "DOM & Browser APIs",
-                    "topics": {
-                        "dom_manipulation": {
-                            "title": "DOM Manipulation",
-                            "definition": "JavaScript can manipulate HTML using DOM APIs.",
+                        },
+                        "timers": {
+                            "title": "setTimeout & setInterval",
+                            "definition": "Timers schedule code execution after a delay or at intervals.",
                             "interview_key_points": [
-                                "querySelector",
-                                "addEventListener",
-                                "Event bubbling"
+                                "setTimeout runs once",
+                                "setInterval runs repeatedly",
+                                "setInterval can cause memory leaks"
                             ],
-                            "code_example": "document.querySelector('p').textContent='Hi';",
+                            "code_example": "setInterval(()=>console.log('run'),1000);",
                             "qa": [
                                 {
-                                    "q": "What is event bubbling?",
-                                    "a": "Event propagates from child to parent."
+                                    "q": "Which can cause memory leak?",
+                                    "a": "setInterval if not cleared."
                                 }
                             ],
                             "example": ""
                         }
                     }
                 },
-                "js_advanced": {
-                    "title": "Advanced JavaScript",
+                "js_advanced_functions": {
+                    "title": "Advanced Functions",
                     "topics": {
-                        "this_keyword": {
-                            "title": "this keyword",
-                            "definition": "this refers to execution context.",
+                        "higher_order_functions": {
+                            "title": "Higher Order Functions",
+                            "definition": "Functions that take other functions as arguments or return functions.",
                             "interview_key_points": [
-                                "Depends on how function is called",
-                                "Arrow functions inherit this"
+                                "map, filter, reduce",
+                                "Functional programming",
+                                "Code reusability"
                             ],
-                            "code_example": "obj.method();",
-                            "qa": [],
-                            "example": ""
-                        },
-                        "prototypes": {
-                            "title": "Prototypes",
-                            "definition": "JavaScript uses prototypal inheritance.",
-                            "interview_key_points": [
-                                "__proto__ vs prototype",
-                                "Inheritance chain"
-                            ],
-                            "code_example": "function A(){} A.prototype.run = function(){};",
+                            "code_example": "[1,2,3].map(x=>x*2);",
                             "qa": [
                                 {
-                                    "q": "What is prototype chain?",
-                                    "a": "Objects inherit properties through prototype links."
+                                    "q": "Is forEach a HOF?",
+                                    "a": "Yes, but it does not return a new array."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "pure_functions": {
+                            "title": "Pure Functions",
+                            "definition": "Pure functions always return the same output for the same input and have no side effects.",
+                            "interview_key_points": [
+                                "No external state",
+                                "Predictable",
+                                "Used in React"
+                            ],
+                            "code_example": "function add(a,b){ return a+b; }",
+                            "qa": [
+                                {
+                                    "q": "Why pure functions are preferred?",
+                                    "a": "Easy testing and debugging."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "iife": {
+                            "title": "IIFE",
+                            "definition": "Immediately Invoked Function Expression executes immediately after definition.",
+                            "interview_key_points": [
+                                "Avoids global pollution",
+                                "Creates private scope"
+                            ],
+                            "code_example": "(function(){ console.log('IIFE'); })();",
+                            "qa": [
+                                {
+                                    "q": "Why use IIFE?",
+                                    "a": "To create private scope."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_oop": {
+                    "title": "Objects & OOP",
+                    "topics": {
+                        "prototype": {
+                            "title": "Prototype",
+                            "definition": "Prototype allows objects to inherit properties and methods.",
+                            "interview_key_points": [
+                                "Shared methods",
+                                "Memory efficient",
+                                "Base of JS OOP"
+                            ],
+                            "code_example": "Person.prototype.sayHi=function(){};",
+                            "qa": [
+                                {
+                                    "q": "Where is toString defined?",
+                                    "a": "Object.prototype."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "classes": {
+                            "title": "Classes & Inheritance",
+                            "definition": "Classes provide syntax for object creation and inheritance.",
+                            "interview_key_points": [
+                                "extends keyword",
+                                "super() mandatory",
+                                "Prototype-based internally"
+                            ],
+                            "code_example": "class A{} class B extends A{}",
+                            "qa": [
+                                {
+                                    "q": "What happens if super is not called?",
+                                    "a": "ReferenceError occurs."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "encapsulation": {
+                            "title": "Encapsulation",
+                            "definition": "Encapsulation hides internal data and exposes controlled access.",
+                            "interview_key_points": [
+                                "Private fields",
+                                "Data protection"
+                            ],
+                            "code_example": "class Bank{ #bal=0; }",
+                            "qa": [
+                                {
+                                    "q": "Can private fields be accessed outside?",
+                                    "a": "No."
+                                }
+                            ],
+                            "example": ""
+                        }
+                    }
+                },
+                "js_performance": {
+                    "title": "Performance & Best Practices",
+                    "topics": {
+                        "debounce": {
+                            "title": "Debounce",
+                            "definition": "Delays function execution until the event stops firing.",
+                            "interview_key_points": [
+                                "Used in search inputs",
+                                "Improves performance"
+                            ],
+                            "code_example": "debounce(fn,500);",
+                            "qa": [
+                                {
+                                    "q": "Debounce vs throttle?",
+                                    "a": "Debounce waits, throttle limits."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "immutability": {
+                            "title": "Immutability",
+                            "definition": "Immutability means not modifying existing data directly.",
+                            "interview_key_points": [
+                                "Avoids side effects",
+                                "Used in React/Redux"
+                            ],
+                            "code_example": "const newArr=[...arr,4];",
+                            "qa": [
+                                {
+                                    "q": "Why immutability?",
+                                    "a": "Predictable state updates."
+                                }
+                            ],
+                            "example": ""
+                        },
+                        "memory_leaks": {
+                            "title": "Memory Leaks",
+                            "definition": "Memory leaks occur when unused memory is not released.",
+                            "interview_key_points": [
+                                "Global variables",
+                                "setInterval",
+                                "Event listeners",
+                                "Closures"
+                            ],
+                            "code_example": "setInterval(()=>{},1000);",
+                            "qa": [
+                                {
+                                    "q": "Which timer causes leaks?",
+                                    "a": "setInterval."
                                 }
                             ],
                             "example": ""
@@ -1217,28 +1304,28 @@
                             "title": "What is jQuery?",
                             "definition": "jQuery is a fast, lightweight JavaScript library that simplifies DOM manipulation, event handling, animations, and AJAX.",
                             "interview_key_points": [
+                                "Built on top of JavaScript",
                                 "Write less, do more",
-                                "Cross-browser compatibility",
-                                "Built on top of JavaScript"
+                                "Handles cross-browser compatibility"
                             ],
-                            "code_example": "$(document).ready(function(){ console.log('Ready'); });",
+                            "code_example": "$('#box').hide();",
                             "qa": [
                                 {
-                                    "q": "Why was jQuery popular?",
-                                    "a": "It simplified DOM operations and handled browser inconsistencies."
+                                    "q": "Is jQuery a framework?",
+                                    "a": "No, jQuery is a JavaScript library."
                                 }
                             ],
                             "example": ""
                         },
-                        "jquery_setup": {
-                            "title": "Including jQuery",
-                            "definition": "jQuery can be added via CDN or local file.",
+                        "jquery_vs_js": {
+                            "title": "JavaScript vs jQuery",
+                            "definition": "JavaScript is a programming language, while jQuery is a library built on JavaScript to simplify common tasks.",
                             "interview_key_points": [
-                                "CDN is faster due to caching",
-                                "Local copy works offline",
-                                "Must be loaded before using $"
+                                "JavaScript is faster in execution",
+                                "jQuery makes development easier",
+                                "jQuery reduces code length"
                             ],
-                            "code_example": "<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>",
+                            "code_example": "document.getElementById('box').style.color='red'; $('#box').css('color','red');",
                             "qa": [],
                             "example": ""
                         }
@@ -1247,178 +1334,194 @@
                 "jquery_selectors": {
                     "title": "jQuery Selectors",
                     "topics": {
-                        "basic_selectors": {
-                            "title": "Basic Selectors",
-                            "definition": "jQuery selectors select HTML elements using CSS-style syntax.",
+                        "selectors_intro": {
+                            "title": "jQuery Selectors",
+                            "definition": "jQuery selectors are used to select and access HTML elements from the DOM for manipulation.",
                             "interview_key_points": [
-                                "Element, class, ID selectors",
-                                "Universal selector",
-                                "Group selectors"
+                                "Uses CSS-style selectors",
+                                "Easy DOM access",
+                                "Supports complex selections"
                             ],
-                            "code_example": "$('p'); $('.box'); $('#id');",
-                            "qa": [
-                                {
-                                    "q": "Difference between CSS selector and jQuery selector?",
-                                    "a": "Syntax is similar, but jQuery returns wrapped elements."
-                                }
-                            ],
+                            "code_example": "$('#id'), $('.class'), $('p')",
+                            "qa": [],
                             "example": ""
                         },
-                        "attribute_selectors": {
-                            "title": "Attribute Selectors",
-                            "definition": "Select elements based on attributes.",
+                        "types_of_selectors": {
+                            "title": "Types of Selectors",
+                            "definition": "jQuery provides different selectors like element, id, class, attribute, and pseudo selectors.",
                             "interview_key_points": [
-                                "[name]",
-                                "[type='text']",
-                                "[href^='http']"
+                                "Element selector",
+                                "ID selector",
+                                "Class selector",
+                                "Attribute selector",
+                                "Pseudo selector"
                             ],
-                            "code_example": "$(\"input[type='text']\");",
+                            "code_example": "$('p'), $('#box'), $('.item'), $('input[type=text]')",
                             "qa": [],
                             "example": ""
                         }
                     }
                 },
-                "jquery_dom": {
-                    "title": "DOM Manipulation",
+                "jquery_dom_ready": {
+                    "title": "DOM Ready",
                     "topics": {
-                        "content_methods": {
-                            "title": "Content Manipulation",
-                            "definition": "Methods to get or set HTML content.",
+                        "document_ready": {
+                            "title": "$(document).ready()",
+                            "definition": "Executes jQuery code after the DOM is fully loaded.",
                             "interview_key_points": [
-                                "html()",
-                                "text()",
-                                "val()"
+                                "Does not wait for images",
+                                "Prevents null element errors",
+                                "Faster than window.onload"
                             ],
-                            "code_example": "$('#msg').text('Hello');",
+                            "code_example": "$(document).ready(function(){ console.log('DOM Loaded'); });",
                             "qa": [
                                 {
-                                    "q": "Difference between text() and html()?",
-                                    "a": "text() sets plain text; html() sets HTML content."
+                                    "q": "Is document.ready mandatory?",
+                                    "a": "No, if script is placed at bottom of the page."
                                 }
                             ],
                             "example": ""
                         },
-                        "css_class_methods": {
-                            "title": "CSS & Class Methods",
-                            "definition": "Modify styles and classes dynamically.",
+                        "ready_vs_onload": {
+                            "title": "document.ready vs window.onload",
+                            "definition": "document.ready runs after DOM load, while window.onload waits for full page load including images.",
                             "interview_key_points": [
-                                "addClass",
-                                "removeClass",
-                                "toggleClass",
-                                "css()"
+                                "document.ready is faster",
+                                "window.onload waits for resources",
+                                "document.ready is jQuery-specific"
                             ],
-                            "code_example": "$('.box').addClass('active');",
+                            "code_example": "",
                             "qa": [],
                             "example": ""
                         }
                     }
                 },
                 "jquery_events": {
-                    "title": "Event Handling",
+                    "title": "jQuery Events",
                     "topics": {
-                        "event_methods": {
-                            "title": "Event Methods",
-                            "definition": "Attach and manage events using jQuery.",
+                        "event_handling": {
+                            "title": "Event Handling",
+                            "definition": "jQuery handles user interactions like click, keyup, and change using event methods.",
                             "interview_key_points": [
-                                "click, change, submit",
-                                "on() preferred",
-                                "off() removes events"
+                                "Uses selectors",
+                                "Executes callback functions",
+                                "Simplifies event binding"
                             ],
-                            "code_example": "$('#btn').on('click', function(){});",
-                            "qa": [
-                                {
-                                    "q": "Why use on() instead of click()?",
-                                    "a": "on() supports event delegation."
-                                }
+                            "code_example": "$('#btn').click(function(){ alert('Clicked'); });",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "on_vs_click": {
+                            "title": "on() vs click()",
+                            "definition": "click() handles only click events for existing elements, while on() supports multiple events and dynamic elements.",
+                            "interview_key_points": [
+                                "on() supports event delegation",
+                                "click() works only on existing elements",
+                                "on() is modern approach"
                             ],
+                            "code_example": "$(document).on('click','#btn',function(){});",
+                            "qa": [],
                             "example": ""
                         },
                         "event_delegation": {
                             "title": "Event Delegation",
-                            "definition": "Handling events for dynamically created elements.",
+                            "definition": "Event delegation attaches a single event listener to a parent element to handle events of child elements using bubbling.",
                             "interview_key_points": [
-                                "Uses event bubbling",
-                                "Better performance",
-                                "Attach handler to parent"
+                                "Improves performance",
+                                "Works for dynamic elements",
+                                "Uses event bubbling"
                             ],
                             "code_example": "$(document).on('click','.item',function(){});",
-                            "qa": [
-                                {
-                                    "q": "When to use event delegation?",
-                                    "a": "When elements are added dynamically."
-                                }
-                            ],
-                            "example": ""
-                        }
-                    }
-                },
-                "jquery_effects": {
-                    "title": "Effects & Animations",
-                    "topics": {
-                        "effects": {
-                            "title": "Effects",
-                            "definition": "jQuery provides built-in effects for UI interactions.",
-                            "interview_key_points": [
-                                "show/hide",
-                                "fadeIn/fadeOut",
-                                "slideUp/slideDown"
-                            ],
-                            "code_example": "$('#box').fadeIn();",
                             "qa": [],
                             "example": ""
                         }
                     }
                 },
                 "jquery_ajax": {
-                    "title": "AJAX",
+                    "title": "jQuery AJAX",
                     "topics": {
-                        "ajax_basics": {
-                            "title": "AJAX Basics",
-                            "definition": "AJAX allows asynchronous HTTP requests without page reload.",
+                        "ajax_intro": {
+                            "title": "What is AJAX?",
+                            "definition": "AJAX allows asynchronous communication with the server without reloading the web page.",
                             "interview_key_points": [
-                                "$.ajax() core method",
-                                "$.get() and $.post() shortcuts",
-                                "Handles JSON/XML"
+                                "Asynchronous calls",
+                                "Partial page updates",
+                                "Uses JSON or XML"
                             ],
-                            "code_example": "$.get('/api/data', function(res){ console.log(res); });",
-                            "qa": [
-                                {
-                                    "q": "Difference between $.ajax and fetch?",
-                                    "a": "$.ajax is jQuery-based; fetch is native modern API."
-                                }
+                            "code_example": "$.get('/api/data',function(res){});",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "ajax_methods": {
+                            "title": "AJAX Methods",
+                            "definition": "jQuery provides multiple AJAX methods for server communication.",
+                            "interview_key_points": [
+                                "$.ajax()",
+                                "$.get()",
+                                "$.post()",
+                                "$.getJSON()"
                             ],
+                            "code_example": "$.ajax({url:'/api',type:'GET'});",
+                            "qa": [],
                             "example": ""
                         }
                     }
                 },
-                "jquery_advanced": {
-                    "title": "Advanced jQuery",
+                "jquery_effects": {
+                    "title": "jQuery Effects",
                     "topics": {
-                        "chaining": {
-                            "title": "Method Chaining",
-                            "definition": "Calling multiple jQuery methods on the same selection.",
+                        "effects_intro": {
+                            "title": "Effects",
+                            "definition": "jQuery effects provide animations and visual transitions for UI interaction.",
                             "interview_key_points": [
-                                "Improves readability",
-                                "Returns jQuery object"
+                                "Show / Hide",
+                                "Fade effects",
+                                "Slide effects",
+                                "Animate"
                             ],
-                            "code_example": "$('#box').addClass('a').fadeIn().css('color','red');",
+                            "code_example": "$('#box').fadeIn();",
                             "qa": [],
                             "example": ""
                         },
-                        "no_conflict": {
-                            "title": "noConflict()",
-                            "definition": "Avoid conflicts with other libraries using $.",
+                        "method_chaining": {
+                            "title": "Method Chaining",
+                            "definition": "Method chaining allows calling multiple jQuery methods on the same element in a single statement.",
                             "interview_key_points": [
-                                "Releases $ symbol",
-                                "Useful with multiple libraries"
+                                "Returns same jQuery object",
+                                "Cleaner code",
+                                "Improves readability"
                             ],
-                            "code_example": "var jq = $.noConflict(); jq('#id').hide();",
-                            "qa": [
-                                {
-                                    "q": "When is noConflict used?",
-                                    "a": "When multiple libraries use $."
-                                }
+                            "code_example": "$('#box').css('color','red').slideUp().slideDown();",
+                            "qa": [],
+                            "example": ""
+                        }
+                    }
+                },
+                "jquery_misc": {
+                    "title": "Miscellaneous",
+                    "topics": {
+                        "html_vs_text": {
+                            "title": "html() vs text()",
+                            "definition": "html() works with HTML content including tags, while text() handles plain text only.",
+                            "interview_key_points": [
+                                "html() supports tags",
+                                "text() escapes HTML",
+                                "Used for content manipulation"
                             ],
+                            "code_example": "$('#box').html('<b>Hi</b>');",
+                            "qa": [],
+                            "example": ""
+                        },
+                        "jquery_popularity": {
+                            "title": "Why jQuery is Less Popular Now",
+                            "definition": "jQuery is less popular due to modern frameworks offering better performance and scalability.",
+                            "interview_key_points": [
+                                "React and Angular dominance",
+                                "Direct DOM manipulation",
+                                "Still used in legacy projects"
+                            ],
+                            "code_example": "",
+                            "qa": [],
                             "example": ""
                         }
                     }
